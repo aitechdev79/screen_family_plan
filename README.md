@@ -42,6 +42,33 @@ This repo is now scaffolded to run standalone with a minimal Next.js project set
 3. Run Prisma generate/migrate/seed.
 4. Start the dev server.
 
+## Recommended Workflow
+
+For this project, the safest delivery flow is:
+
+1. Run and verify locally
+2. Commit and push to GitHub
+3. Deploy from GitHub to Vercel
+
+Typical local flow:
+
+```bash
+cp .env.example .env
+npm install
+npx prisma migrate dev --name init
+npm run seed
+npm run dev
+```
+
+After local verification:
+
+```bash
+git status
+git add .
+git commit -m "your message"
+git push origin master
+```
+
 ## Required Dependencies
 
 Dependencies are already declared in `package.json`.
@@ -74,6 +101,8 @@ Notes:
 - `AUTH_SECRET` is required by NextAuth.
 - Depending on your deployment setup, `AUTH_URL` may be optional locally, but it is recommended.
 - `.env.example` is included in the repo for local setup.
+- For local development, set `AUTH_URL=http://localhost:3000`.
+- For Vercel, set `AUTH_URL` to your real deployed domain, for example `https://your-app.vercel.app`.
 
 ## Prisma Setup
 
@@ -101,6 +130,32 @@ The included seed creates:
 
 - Email: `demo@example.com`
 - Password: `Password123!`
+
+## Vercel Deploy
+
+This repo now includes a minimal [vercel.json](./vercel.json).
+
+### Deploy Steps
+
+1. Push your working code to GitHub
+2. Import the GitHub repo into Vercel
+3. Confirm the framework is detected as Next.js
+4. Add production environment variables in Vercel
+5. Deploy
+
+### Required Vercel Environment Variables
+
+```env
+DATABASE_URL=...
+AUTH_SECRET=...
+AUTH_URL=https://your-domain.vercel.app
+```
+
+### Production Notes
+
+- The production database must be reachable from Vercel.
+- Run Prisma migrations against the production database before using the app.
+- If you use a custom domain, update `AUTH_URL` to that final domain.
 
 ## Auth Behavior
 
