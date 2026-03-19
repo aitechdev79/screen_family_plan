@@ -13,19 +13,19 @@ export function buildDailyRhythm(
     if (child.ageBand === "0-5") {
       return [
         {
-          label: "Buoi sang",
+          label: "Buổi sáng",
           recommendation:
-            "Uu tien an sang, van dong, doc sach va tuong tac truc tiep; tranh giai tri bang man hinh.",
+            "Ưu tiên ăn sáng, vận động, đọc sách và tương tác trực tiếp; tránh giải trí bằng màn hình.",
         },
         {
-          label: "Ban ngay",
+          label: "Ban ngày",
           recommendation:
-            "Neu dung man hinh, uu tien noi dung ngan, chat luong cao va co nguoi lon cung tham gia.",
+            "Nếu dùng màn hình, ưu tiên nội dung ngắn, chất lượng cao và có người lớn cùng tham gia.",
         },
         {
-          label: "Buoi toi",
+          label: "Buổi tối",
           recommendation:
-            "Chuyen dan sang choi tu do, doc sach, tro chuyen; dung man hinh it nhat 1 gio truoc khi ngu.",
+            "Chuyển dần sang chơi tự do, đọc sách, trò chuyện; dừng màn hình ít nhất 1 giờ trước khi ngủ.",
         },
       ];
     }
@@ -33,37 +33,37 @@ export function buildDailyRhythm(
     if (child.ageBand === "6-12") {
       return [
         {
-          label: "Truoc gio hoc",
-          recommendation: "Khong dung man hinh giai tri truoc khi den truong.",
+          label: "Trước giờ học",
+          recommendation: "Không dùng màn hình giải trí trước khi đến trường.",
         },
         {
-          label: "Sau gio hoc",
+          label: "Sau giờ học",
           recommendation:
-            "Hoan thanh bai tap, van dong hoac viec nha truoc khi dung man hinh giai tri.",
+            "Hoàn thành bài tập, vận động hoặc việc nhà trước khi dùng màn hình giải trí.",
         },
         {
-          label: "Buoi toi",
+          label: "Buổi tối",
           recommendation:
-            "Dung man hinh trong khung gio ro rang, tat thong bao va dung it nhat 1 gio truoc khi ngu.",
+            "Dùng màn hình trong khung giờ rõ ràng, tắt thông báo và dừng ít nhất 1 giờ trước khi ngủ.",
         },
       ];
     }
 
     return [
       {
-        label: "Buoi sang",
+        label: "Buổi sáng",
         recommendation:
-          "Tranh luot dien thoai ngay sau khi thuc day; uu tien chuan bi cho ngay moi.",
+          "Tránh lướt điện thoại ngay sau khi thức dậy; ưu tiên chuẩn bị cho ngày mới.",
       },
       {
-        label: "Sau gio hoc",
+        label: "Sau giờ học",
         recommendation:
-          "Tach ro thoi gian hoc, giai tri va mang xa hoi; uu tien tung man hinh mot.",
+          "Tách rõ thời gian học, giải trí và mạng xã hội; ưu tiên từng màn hình một.",
       },
       {
-        label: "Buoi toi",
+        label: "Buổi tối",
         recommendation:
-          "Bat do-not-disturb, tranh feed vo tan va dung man hinh it nhat 1 gio truoc khi ngu.",
+          "Bật chế độ Không làm phiền, tránh feed vô tận và dừng màn hình ít nhất 1 giờ trước khi ngủ.",
       },
     ];
   }

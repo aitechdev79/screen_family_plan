@@ -40,11 +40,11 @@ export function LoginForm({ locale = "vi" }: { locale?: string }) {
   return (
     <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border p-6">
       <div>
-        <label className="mb-1 block text-sm font-medium">Email</label>
+        <label className="mb-1 block text-sm font-medium">{text.emailLabel}</label>
         <input className="w-full rounded-xl border px-3 py-2" value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium">Password</label>
+        <label className="mb-1 block text-sm font-medium">{text.passwordLabel}</label>
         <input className="w-full rounded-xl border px-3 py-2" value={password} onChange={(e) => setPassword(e.target.value)} type="password" required />
       </div>
       {error ? <p className="text-sm text-red-600">{error}</p> : null}

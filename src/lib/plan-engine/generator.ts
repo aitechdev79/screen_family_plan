@@ -4,35 +4,11 @@ import { scoreAction } from "./scoring";
 import { ACTION_TEMPLATES } from "./templates";
 import { buildParentTips } from "./tips";
 import { FamilyInput, GeneratedPlan, RecommendedAction } from "./types";
-
-function toPriorityAreas(concerns: string[]) {
-  const map: Record<string, string> = {
-    sleep: "Sleep protection",
-    addiction: "Reduce compulsive use",
-    attention: "Focus and routines",
-    emotion: "Emotion regulation",
-    safety: "Digital safety",
-    content_quality: "Content quality",
-    gaming: "Healthy gaming",
-    overspending: "Spending boundaries",
-    social_media: "Social media readiness",
-  };
-
-  return concerns.map((concern) => map[concern] ?? concern);
-}
-
-function toCrowdingOutAreas(items: string[]) {
-  const map: Record<string, string> = {
-    sleep: "Sleep",
-    homework: "Homework and school focus",
-    physical_activity: "Physical activity",
-    reading: "Reading",
-    family_time: "Family time",
-    in_person_socializing: "In-person connection",
-  };
-
-  return items.map((item) => map[item] ?? item);
-}
+import {
+  buildLocalizedOverallSummary,
+  localizeCrowdingOutArea,
+  localizePriorityArea,
+} from "./localization";
 
 function pickTopDiverseActions(actions: RecommendedAction[], limit: number) {
   const picked: RecommendedAction[] = [];
@@ -70,45 +46,6 @@ function pickTopDiverseActions(actions: RecommendedAction[], limit: number) {
   };
 }
 
-function buildOverallSummary(input: FamilyInput) {
-  const summaries: string[] = [];
-  const crowdingOut = new Set(input.children.flatMap((child) => child.crowdingOut));
-  const goals = new Set(input.familyGoals);
-
-  if (crowdingOut.has("sleep") || goals.has("sleep_better")) {
-    summaries.push("This plan prioritizes sleep protection and calmer evening routines.");
-  }
-
-  if (
-    crowdingOut.has("homework") ||
-    crowdingOut.has("physical_activity") ||
-    crowdingOut.has("reading")
-  ) {
-    summaries.push("Recommendations are designed to crowd healthy offline activities back in.");
-  }
-
-  if (
-    input.children.some(
-      (child) =>
-        child.hasAutoplayOrEndlessScroll ||
-        child.notificationsDisrupt ||
-        child.chatsWithUnknownPeople,
-    )
-  ) {
-    summaries.push("The plan addresses design risks like autoplay, notifications, and unsafe contact.");
-  }
-
-  if (goals.has("family_connection")) {
-    summaries.push("The plan includes shared routines and conversations to strengthen family connection.");
-  }
-
-  if (summaries.length < 2) {
-    summaries.push("Recommendations are personalized by age, concerns, device context, and family goals.");
-  }
-
-  return summaries.slice(0, 3);
-}
-
 export function generatePlan(input: FamilyInput): GeneratedPlan {
   const children = input.children.map((child) => {
     const scored = ACTION_TEMPLATES.map((template) => scoreAction(template, child, input))
@@ -124,8 +61,8 @@ export function generatePlan(input: FamilyInput): GeneratedPlan {
       childId: child.id,
       nickname: child.nickname,
       ageBand: child.ageBand,
-      priorityAreas: toPriorityAreas(child.concerns),
-      crowdingOutAreas: toCrowdingOutAreas(child.crowdingOut),
+      priorityAreas: child.concerns.map((concern) => localizePriorityArea(concern, input.locale)),
+      crowdingOutAreas: child.crowdingOut.map((item) => localizeCrowdingOutArea(item, input.locale)),
       recommendedActions: recommendedSelection.picked,
       optionalActions: optionalSelection.picked,
       dailyRhythm: buildDailyRhythm(child, input.locale),
@@ -137,7 +74,7 @@ export function generatePlan(input: FamilyInput): GeneratedPlan {
   return {
     familyName: input.familyName,
     locale: input.locale,
-    overallSummary: buildOverallSummary(input),
+    overallSummary: buildLocalizedOverallSummary(input),
     children,
   };
 }

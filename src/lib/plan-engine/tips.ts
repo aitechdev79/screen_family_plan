@@ -7,8 +7,8 @@ export function buildParentTips(
   const tips =
     locale === "vi"
       ? [
-          "Tro chuyen thuong xuyen voi con ve nhung gi con xem, choi, va cam thay.",
-          "Uu tien noi dung chat luong cao, cham hon, it quang cao, va phu hop voi do tuoi.",
+          "Trò chuyện thường xuyên với con về những gì con xem, chơi và cảm thấy.",
+          "Ưu tiên nội dung chất lượng cao, chậm hơn, ít quảng cáo hơn và phù hợp với độ tuổi.",
         ]
       : [
           "Talk regularly about what your child watches, plays, and feels online.",
@@ -18,7 +18,7 @@ export function buildParentTips(
   if (child.ageBand === "0-5") {
     tips.push(
       locale === "vi"
-        ? "Voi tre nho, co-gang cung xem va cung choi de bien media thanh trai nghiem tuong tac."
+        ? "Với trẻ nhỏ, cố gắng cùng xem và cùng chơi để biến media thành trải nghiệm tương tác."
         : "For young children, co-view and co-play whenever possible so media stays relational and interactive.",
     );
   }
@@ -26,7 +26,7 @@ export function buildParentTips(
   if (child.concerns.includes("sleep") || child.crowdingOut.includes("sleep")) {
     tips.push(
       locale === "vi"
-        ? "Bao ve giac ngu la uu tien hang dau; giu routine buoi toi on dinh va khong dem thiet bi vao phong ngu."
+        ? "Bảo vệ giấc ngủ là ưu tiên hàng đầu; giữ nhịp buổi tối ổn định và không đem thiết bị vào phòng ngủ."
         : "Protect sleep first with a stable evening routine and by keeping devices out of the bedroom.",
     );
   }
@@ -34,7 +34,7 @@ export function buildParentTips(
   if (child.usesScreenForCalming) {
     tips.push(
       locale === "vi"
-        ? "Chuan bi san cach thay the de giup con binh tinh: om, hit tho, to mau, sach tranh, di bo ngan."
+        ? "Chuẩn bị sẵn cách thay thế để giúp con bình tĩnh: ôm, hít thở, tô màu, sách tranh hoặc đi bộ ngắn."
         : "Prepare non-screen calming tools ahead of time such as breathing, drawing, books, music, or a short walk.",
     );
   }
@@ -42,7 +42,7 @@ export function buildParentTips(
   if (child.hasAutoplayOrEndlessScroll) {
     tips.push(
       locale === "vi"
-        ? "Giai thich cho con rang autoplay va feed vo tan duoc thiet ke de keo dai thoi gian xem."
+        ? "Giải thích cho con rằng tự động phát và feed vô tận được thiết kế để kéo dài thời gian xem."
         : "Explain that autoplay and endless feeds are designed to keep people watching, not to help them stop.",
     );
   }
@@ -53,7 +53,7 @@ export function buildParentTips(
   ) {
     tips.push(
       locale === "vi"
-        ? "Day con nhan ra quang cao, nguon thong tin kem tin cay, va cach block/report khi gap noi dung doc hai."
+        ? "Dạy con nhận ra quảng cáo, nguồn thông tin kém tin cậy và cách chặn hoặc báo cáo khi gặp nội dung độc hại."
         : "Teach your child to spot ads, low-trust information, and how to block or report harmful content.",
     );
   }
@@ -61,7 +61,7 @@ export function buildParentTips(
   if (child.chatsWithUnknownPeople) {
     tips.push(
       locale === "vi"
-        ? "Tap truoc cac tinh huong 'neu-thi' cho tin nhan la, xin anh rieng tu, hoac noi dung khien con thay lo."
+        ? "Tập trước các tình huống 'nếu - thì' cho tin nhắn lạ, yêu cầu gửi ảnh riêng tư hoặc nội dung khiến con thấy lo."
         : "Rehearse simple if-then responses for strangers, pressure to share images, or content that feels unsafe.",
     );
   }

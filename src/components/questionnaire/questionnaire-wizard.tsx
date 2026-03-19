@@ -57,7 +57,7 @@ function normalizeFamilyInput(input: FamilyInput): FamilyInput {
 }
 
 function toggle<T extends string>(list: T[], item: T) {
-  return list.includes(item) ? list.filter((v) => v !== item) : [...list, item];
+  return list.includes(item) ? list.filter((value) => value !== item) : [...list, item];
 }
 
 export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanId }: WizardProps) {
@@ -87,7 +87,9 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
   function updateChild(index: number, patch: Partial<FamilyInput["children"][number]>) {
     setForm((current) => ({
       ...current,
-      children: current.children.map((child, i) => (i === index ? { ...child, ...patch } : child)),
+      children: current.children.map((child, childIndex) =>
+        childIndex === index ? { ...child, ...patch } : child,
+      ),
     }));
   }
 
@@ -127,7 +129,10 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
     <div className="space-y-6">
       <div className="flex flex-wrap gap-2">
         {text.steps.map((label, index) => (
-          <div key={label} className={`rounded-full px-4 py-2 text-sm ${index === step ? "bg-neutral-900 text-white" : "bg-neutral-100"}`}>
+          <div
+            key={label}
+            className={`rounded-full px-4 py-2 text-sm ${index === step ? "bg-neutral-900 text-white" : "bg-neutral-100"}`}
+          >
             {index + 1}. {label}
           </div>
         ))}
@@ -138,7 +143,11 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
           <h2 className="text-xl font-semibold">{text.familyInfo}</h2>
           <div>
             <label className="mb-1 block text-sm font-medium">{text.familyName}</label>
-            <input className="w-full rounded-xl border px-3 py-2" value={form.familyName} onChange={(e) => setForm({ ...form, familyName: e.target.value })} />
+            <input
+              className="w-full rounded-xl border px-3 py-2"
+              value={form.familyName}
+              onChange={(e) => setForm({ ...form, familyName: e.target.value })}
+            />
           </div>
         </section>
       ) : null}
@@ -152,7 +161,12 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                 <input
                   type="checkbox"
                   checked={form.familyGoals.includes(goal.value as any)}
-                  onChange={() => setForm((current) => ({ ...current, familyGoals: toggle(current.familyGoals, goal.value as any) }))}
+                  onChange={() =>
+                    setForm((current) => ({
+                      ...current,
+                      familyGoals: toggle(current.familyGoals, goal.value as any),
+                    }))
+                  }
                 />
                 <span>{goal.label}</span>
               </label>
@@ -168,17 +182,34 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
             <button
               type="button"
               className="rounded-xl border px-3 py-2"
-              onClick={() => setForm((current) => ({ ...current, children: [...current.children, EMPTY_CHILD()] }))}
+              onClick={() =>
+                setForm((current) => ({
+                  ...current,
+                  children: [...current.children, EMPTY_CHILD()],
+                }))
+              }
             >
               {text.addChild}
             </button>
           </div>
+
           {form.children.map((child, index) => (
             <div key={child.id} className="space-y-4 rounded-2xl bg-neutral-50 p-4">
               <div className="flex items-center justify-between">
-                <h3 className="font-semibold">{text.childLabel} #{index + 1}</h3>
+                <h3 className="font-semibold">
+                  {text.childLabel} #{index + 1}
+                </h3>
                 {form.children.length > 1 ? (
-                  <button type="button" className="text-sm text-red-600" onClick={() => setForm((current) => ({ ...current, children: current.children.filter((_, i) => i !== index) }))}>
+                  <button
+                    type="button"
+                    className="text-sm text-red-600"
+                    onClick={() =>
+                      setForm((current) => ({
+                        ...current,
+                        children: current.children.filter((_, childIndex) => childIndex !== index),
+                      }))
+                    }
+                  >
                     {text.delete}
                   </button>
                 ) : null}
@@ -187,11 +218,19 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="mb-1 block text-sm font-medium">{text.nickname}</label>
-                  <input className="w-full rounded-xl border px-3 py-2" value={child.nickname} onChange={(e) => updateChild(index, { nickname: e.target.value })} />
+                  <input
+                    className="w-full rounded-xl border px-3 py-2"
+                    value={child.nickname}
+                    onChange={(e) => updateChild(index, { nickname: e.target.value })}
+                  />
                 </div>
                 <div>
                   <label className="mb-1 block text-sm font-medium">{text.ageBand}</label>
-                  <select className="w-full rounded-xl border px-3 py-2" value={child.ageBand} onChange={(e) => updateChild(index, { ageBand: e.target.value as any })}>
+                  <select
+                    className="w-full rounded-xl border px-3 py-2"
+                    value={child.ageBand}
+                    onChange={(e) => updateChild(index, { ageBand: e.target.value as any })}
+                  >
                     <option value="0-5">0-5</option>
                     <option value="6-12">6-12</option>
                     <option value="13-18">13-18</option>
@@ -203,30 +242,57 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                 label={text.devices}
                 items={deviceOptions}
                 values={child.devices}
-                onToggle={(value) => updateChild(index, { devices: toggle(child.devices as string[], value as string) as any })}
+                onToggle={(value) =>
+                  updateChild(index, {
+                    devices: toggle(child.devices as string[], value as string) as any,
+                  })
+                }
               />
+
               <CheckboxGrid
                 label={text.usage}
                 items={usageOptions}
                 values={child.mainUsage}
-                onToggle={(value) => updateChild(index, { mainUsage: toggle(child.mainUsage as string[], value as string) as any })}
+                onToggle={(value) =>
+                  updateChild(index, {
+                    mainUsage: toggle(child.mainUsage as string[], value as string) as any,
+                  })
+                }
               />
+
               <CheckboxGrid
                 label={text.concerns}
                 items={concernOptions}
                 values={child.concerns}
-                onToggle={(value) => updateChild(index, { concerns: toggle(child.concerns as string[], value as string) as any })}
+                onToggle={(value) =>
+                  updateChild(index, {
+                    concerns: toggle(child.concerns as string[], value as string) as any,
+                  })
+                }
               />
+
               <CheckboxGrid
                 label={text.crowdingOut}
                 items={crowdingOutOptions}
                 values={child.crowdingOut}
-                onToggle={(value) => updateChild(index, { crowdingOut: toggle(child.crowdingOut as string[], value as string) as any })}
+                onToggle={(value) =>
+                  updateChild(index, {
+                    crowdingOut: toggle(child.crowdingOut as string[], value as string) as any,
+                  })
+                }
               />
 
               <div className="grid gap-4 sm:grid-cols-2">
-                <NumberField label={text.weekdayHours} value={child.screenHoursWeekday} onChange={(value) => updateChild(index, { screenHoursWeekday: value })} />
-                <NumberField label={text.weekendHours} value={child.screenHoursWeekend} onChange={(value) => updateChild(index, { screenHoursWeekend: value })} />
+                <NumberField
+                  label={text.weekdayHours}
+                  value={child.screenHoursWeekday}
+                  onChange={(value) => updateChild(index, { screenHoursWeekday: value })}
+                />
+                <NumberField
+                  label={text.weekendHours}
+                  value={child.screenHoursWeekend}
+                  onChange={(value) => updateChild(index, { screenHoursWeekend: value })}
+                />
               </div>
 
               <div>
@@ -245,9 +311,21 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                <ToggleField label={text.bedroomDevice} checked={child.hasDeviceInBedroom} onChange={(checked) => updateChild(index, { hasDeviceInBedroom: checked })} />
-                <ToggleField label={text.calming} checked={child.usesScreenForCalming} onChange={(checked) => updateChild(index, { usesScreenForCalming: checked })} />
-                <ToggleField label={text.personalDevice} checked={child.hasPersonalDevice} onChange={(checked) => updateChild(index, { hasPersonalDevice: checked })} />
+                <ToggleField
+                  label={text.bedroomDevice}
+                  checked={child.hasDeviceInBedroom}
+                  onChange={(checked) => updateChild(index, { hasDeviceInBedroom: checked })}
+                />
+                <ToggleField
+                  label={text.calming}
+                  checked={child.usesScreenForCalming}
+                  onChange={(checked) => updateChild(index, { usesScreenForCalming: checked })}
+                />
+                <ToggleField
+                  label={text.personalDevice}
+                  checked={child.hasPersonalDevice}
+                  onChange={(checked) => updateChild(index, { hasPersonalDevice: checked })}
+                />
                 <ToggleField
                   label={text.autoplay}
                   checked={child.hasAutoplayOrEndlessScroll}
@@ -272,11 +350,17 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
       {step === 3 ? (
         <section className="space-y-4 rounded-2xl border p-6">
           <h2 className="text-xl font-semibold">{text.review}</h2>
-          <p className="text-sm text-neutral-600">{text.reviewFamily}: {form.familyName || text.notEntered}</p>
-          <p className="text-sm text-neutral-600">{text.reviewChildren}: {form.children.length}</p>
+          <p className="text-sm text-neutral-600">
+            {text.reviewFamily}: {form.familyName || text.notEntered}
+          </p>
+          <p className="text-sm text-neutral-600">
+            {text.reviewChildren}: {form.children.length}
+          </p>
           <ul className="list-disc pl-5 text-sm text-neutral-700">
             {form.children.map((child) => (
-              <li key={child.id}>{child.nickname || text.unnamed} · {child.ageBand} · {child.mainUsage.join(", ")}</li>
+              <li key={child.id}>
+                {child.nickname || text.unnamed} · {child.ageBand} · {child.mainUsage.join(", ")}
+              </li>
             ))}
           </ul>
         </section>
@@ -285,15 +369,29 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
       {error ? <p className="text-sm text-red-600">{error}</p> : null}
 
       <div className="flex gap-3">
-        <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0} className="rounded-xl border px-4 py-2 disabled:opacity-40">
+        <button
+          type="button"
+          onClick={() => setStep((currentStep) => Math.max(0, currentStep - 1))}
+          disabled={step === 0}
+          className="rounded-xl border px-4 py-2 disabled:opacity-40"
+        >
           {text.back}
         </button>
         {step < text.steps.length - 1 ? (
-          <button type="button" onClick={() => setStep((s) => Math.min(text.steps.length - 1, s + 1))} className="rounded-xl bg-neutral-900 px-4 py-2 text-white">
+          <button
+            type="button"
+            onClick={() => setStep((currentStep) => Math.min(text.steps.length - 1, currentStep + 1))}
+            className="rounded-xl bg-neutral-900 px-4 py-2 text-white"
+          >
             {text.continue}
           </button>
         ) : (
-          <button type="button" onClick={submit} disabled={submitting} className="rounded-xl bg-neutral-900 px-4 py-2 text-white disabled:opacity-50">
+          <button
+            type="button"
+            onClick={submit}
+            disabled={submitting}
+            className="rounded-xl bg-neutral-900 px-4 py-2 text-white disabled:opacity-50"
+          >
             {submitting ? text.creating : existingPlanId ? text.updatePreview : text.create}
           </button>
         )}
@@ -302,7 +400,17 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
   );
 }
 
-function CheckboxGrid({ label, items, values, onToggle }: { label: string; items: { value: string; label: string }[]; values: string[]; onToggle: (value: string) => void; }) {
+function CheckboxGrid({
+  label,
+  items,
+  values,
+  onToggle,
+}: {
+  label: string;
+  items: { value: string; label: string }[];
+  values: string[];
+  onToggle: (value: string) => void;
+}) {
   return (
     <div>
       <p className="mb-2 text-sm font-medium">{label}</p>
@@ -318,16 +426,40 @@ function CheckboxGrid({ label, items, values, onToggle }: { label: string; items
   );
 }
 
-function NumberField({ label, value, onChange }: { label: string; value: number; onChange: (value: number) => void; }) {
+function NumberField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  onChange: (value: number) => void;
+}) {
   return (
     <div>
       <label className="mb-1 block text-sm font-medium">{label}</label>
-      <input className="w-full rounded-xl border px-3 py-2" type="number" min={0} max={24} step={0.5} value={value} onChange={(e) => onChange(Number(e.target.value))} />
+      <input
+        className="w-full rounded-xl border px-3 py-2"
+        type="number"
+        min={0}
+        max={24}
+        step={0.5}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
     </div>
   );
 }
 
-function ToggleField({ label, checked, onChange }: { label: string; checked: boolean; onChange: (value: boolean) => void; }) {
+function ToggleField({
+  label,
+  checked,
+  onChange,
+}: {
+  label: string;
+  checked: boolean;
+  onChange: (value: boolean) => void;
+}) {
   return (
     <label className="flex items-center justify-between rounded-xl border bg-white px-3 py-2 text-sm">
       <span>{label}</span>

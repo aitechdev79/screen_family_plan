@@ -55,11 +55,11 @@ export function RegisterForm({ locale = "vi" }: { locale?: string }) {
         <input className="w-full rounded-xl border px-3 py-2" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium">Email</label>
+        <label className="mb-1 block text-sm font-medium">{text.emailLabel}</label>
         <input className="w-full rounded-xl border px-3 py-2" value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium">Password</label>
+        <label className="mb-1 block text-sm font-medium">{text.passwordLabel}</label>
         <input className="w-full rounded-xl border px-3 py-2" value={password} onChange={(e) => setPassword(e.target.value)} type="password" minLength={8} required />
       </div>
       {error ? <p className="text-sm text-red-600">{error}</p> : null}

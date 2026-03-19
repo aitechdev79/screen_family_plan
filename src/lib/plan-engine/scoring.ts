@@ -7,6 +7,7 @@ import {
   RecommendedAction,
   UsageType,
 } from "./types";
+import { localizeAction, localizeReason } from "./localization";
 
 function hasConcern(child: ChildInput, concerns?: Concern[]) {
   if (!concerns?.length) return false;
@@ -240,9 +241,9 @@ export function scoreAction(
   return {
     key: template.key,
     domain: template.domain,
-    title: template.title,
-    description: template.description,
+    title: localizeAction(template, family.locale).title,
+    description: localizeAction(template, family.locale).description,
     score,
-    reasons,
+    reasons: reasons.map((reason) => localizeReason(reason, family.locale)),
   };
 }
