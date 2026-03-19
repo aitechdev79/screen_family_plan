@@ -1,9 +1,14 @@
+import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import type { FamilyInput } from "@/lib/plan-engine/types";
 import type { GeneratedPlan } from "@/lib/plan-engine/types";
 
+function toJsonValue(value: FamilyInput | GeneratedPlan): Prisma.InputJsonValue {
+  return value as unknown as Prisma.InputJsonValue;
+}
+
 async function createChildProfiles(
-  tx: typeof prisma,
+  tx: Prisma.TransactionClient,
   userId: string,
   children: FamilyInput["children"],
 ) {
@@ -77,8 +82,8 @@ export async function createPlan(params: {
         userId: params.userId,
         familyName: params.familyName,
         locale: params.locale,
-        answersJson: params.answersJson,
-        generatedPlanJson: params.generatedPlanJson,
+        answersJson: toJsonValue(params.answersJson),
+        generatedPlanJson: toJsonValue(params.generatedPlanJson),
         notes: params.notes,
         children: {
           create: childIds.map((childProfileId) => ({ childProfileId })),
@@ -86,8 +91,8 @@ export async function createPlan(params: {
         versions: {
           create: {
             version: 1,
-            answersJson: params.answersJson,
-            generatedPlanJson: params.generatedPlanJson,
+            answersJson: toJsonValue(params.answersJson),
+            generatedPlanJson: toJsonValue(params.generatedPlanJson),
           },
         },
       },
@@ -131,8 +136,8 @@ export async function updatePlan(params: {
       data: {
         familyName: params.familyName,
         locale: params.locale,
-        answersJson: params.answersJson,
-        generatedPlanJson: params.generatedPlanJson,
+        answersJson: toJsonValue(params.answersJson),
+        generatedPlanJson: toJsonValue(params.generatedPlanJson),
         notes: params.notes,
         version: nextVersion,
         children: {
@@ -142,8 +147,8 @@ export async function updatePlan(params: {
         versions: {
           create: {
             version: nextVersion,
-            answersJson: params.answersJson,
-            generatedPlanJson: params.generatedPlanJson,
+            answersJson: toJsonValue(params.answersJson),
+            generatedPlanJson: toJsonValue(params.generatedPlanJson),
           },
         },
       },

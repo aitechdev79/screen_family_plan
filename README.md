@@ -8,7 +8,7 @@ This repository contains the application source for a localized Family Media Pla
 - Server Actions for preview/save flows
 - Rule-based media plan generation
 
-The current repo is a source tree starter, not a fully bootstrapped runnable project yet. In particular, it does not currently include a `package.json`, lockfile, or Next.js project scaffold files.
+This repo is now scaffolded to run standalone with a minimal Next.js project setup, including `package.json`, lockfile, app layout, global styles, and build scripts.
 
 ## What Is Included
 
@@ -37,53 +37,26 @@ The current repo is a source tree starter, not a fully bootstrapped runnable pro
 
 ## Setup
 
-You have two reasonable ways to use this repo.
-
-### Option 1: Copy Into An Existing Next.js App
-
-Use this if you already have a Next.js App Router project.
-
-1. Copy `src/`, `prisma/`, and `middleware.ts` into your app.
-2. Install the required dependencies.
-3. Add environment variables.
-4. Run Prisma generate/migrate/seed.
-5. Start the app.
-
-### Option 2: Bootstrap A New App First
-
-Use this if you want to run this repo as a standalone app.
-
-1. Create a new Next.js app with App Router and TypeScript.
-2. Copy the contents of this repo into that app.
-3. Install the dependencies below.
-4. Add the environment variables below.
-5. Run Prisma generate/migrate/seed.
-6. Start the dev server.
-
-Example bootstrap:
-
-```bash
-npx create-next-app@latest screen-family-plan
-cd screen-family-plan
-```
-
-Then copy this repository's source files into that project.
+1. Install dependencies.
+2. Add environment variables.
+3. Run Prisma generate/migrate/seed.
+4. Start the dev server.
 
 ## Required Dependencies
 
-Install runtime dependencies:
+Dependencies are already declared in `package.json`.
+
+Install everything with:
 
 ```bash
-npm install next react react-dom next-auth zod @prisma/client bcryptjs clsx tailwind-merge
+npm install
 ```
 
-Install development dependencies:
+Build verification:
 
 ```bash
-npm install -D prisma typescript @types/node @types/react @types/react-dom
+npm run build
 ```
-
-If your target app does not already have Tailwind configured, you will also need the Tailwind setup appropriate for your Next.js version.
 
 ## Environment Variables
 
@@ -171,15 +144,12 @@ The repo also includes API routes for compatibility and direct integration:
 
 ## Current Limitations
 
-- No `package.json` or lockfile is included yet in this repo
 - No tested deployment config is included yet
 - No automated test suite is included yet
-- The print experience is polished at component level, but not backed by a dedicated global print stylesheet
+- Prisma still warns that `package.json#prisma` seed config is deprecated and should later move to `prisma.config.ts`
 
 ## Suggested Next Steps
 
-- Add a real `package.json` and lockfile
-- Add a root layout and global styles if this is meant to run standalone
 - Add form-level validation messaging and disabled-state polish
 - Add automated tests for server actions and repository updates
 - Add share/export workflows for saved plans
