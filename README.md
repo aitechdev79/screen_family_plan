@@ -60,7 +60,7 @@ npm run build
 
 ## Environment Variables
 
-Create `.env` with at least:
+Copy `.env.example` to `.env` and update the values:
 
 ```env
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/DB_NAME"
@@ -73,8 +73,11 @@ Notes:
 - `DATABASE_URL` is required by Prisma.
 - `AUTH_SECRET` is required by NextAuth.
 - Depending on your deployment setup, `AUTH_URL` may be optional locally, but it is recommended.
+- `.env.example` is included in the repo for local setup.
 
 ## Prisma Setup
+
+This repo now uses `prisma.config.ts` for seed configuration instead of the deprecated `package.json#prisma` field.
 
 Generate the Prisma client:
 
@@ -146,7 +149,6 @@ The repo also includes API routes for compatibility and direct integration:
 
 - No tested deployment config is included yet
 - No automated test suite is included yet
-- Prisma still warns that `package.json#prisma` seed config is deprecated and should later move to `prisma.config.ts`
 
 ## Suggested Next Steps
 
