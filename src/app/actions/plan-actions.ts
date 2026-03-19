@@ -28,26 +28,33 @@ export async function savePlanAction(payload: {
   generatedPlanJson: unknown;
   notes?: string;
 }) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return { ok: false as const, error: "Unauthorized" };
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return { ok: false as const, error: "Unauthorized" };
+    }
+
+    const parsed = mediaPlanSaveSchema.safeParse(payload);
+    if (!parsed.success) {
+      return { ok: false as const, error: "Invalid plan payload." };
+    }
+
+    const plan = await createPlan({
+      userId: session.user.id,
+      familyName: parsed.data.familyName,
+      locale: parsed.data.locale,
+      answersJson: parsed.data.answersJson,
+      generatedPlanJson: parsed.data.generatedPlanJson as any,
+      notes: parsed.data.notes || undefined,
+    });
+
+    return { ok: true as const, id: plan.id };
+  } catch (error) {
+    return {
+      ok: false as const,
+      error: error instanceof Error ? error.message : "Failed to save plan.",
+    };
   }
-
-  const parsed = mediaPlanSaveSchema.safeParse(payload);
-  if (!parsed.success) {
-    return { ok: false as const, error: "Invalid plan payload." };
-  }
-
-  const plan = await createPlan({
-    userId: session.user.id,
-    familyName: parsed.data.familyName,
-    locale: parsed.data.locale,
-    answersJson: parsed.data.answersJson,
-    generatedPlanJson: parsed.data.generatedPlanJson as any,
-    notes: parsed.data.notes || undefined,
-  });
-
-  return { ok: true as const, id: plan.id };
 }
 
 export async function updatePlanAction(
@@ -60,25 +67,32 @@ export async function updatePlanAction(
     notes?: string;
   },
 ) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return { ok: false as const, error: "Unauthorized" };
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return { ok: false as const, error: "Unauthorized" };
+    }
+
+    const parsed = mediaPlanSaveSchema.safeParse(payload);
+    if (!parsed.success) {
+      return { ok: false as const, error: "Invalid plan payload." };
+    }
+
+    const plan = await updatePlan({
+      userId: session.user.id,
+      planId,
+      familyName: parsed.data.familyName,
+      locale: parsed.data.locale,
+      answersJson: parsed.data.answersJson,
+      generatedPlanJson: parsed.data.generatedPlanJson as any,
+      notes: parsed.data.notes || undefined,
+    });
+
+    return { ok: true as const, id: plan.id, version: plan.version };
+  } catch (error) {
+    return {
+      ok: false as const,
+      error: error instanceof Error ? error.message : "Failed to update plan.",
+    };
   }
-
-  const parsed = mediaPlanSaveSchema.safeParse(payload);
-  if (!parsed.success) {
-    return { ok: false as const, error: "Invalid plan payload." };
-  }
-
-  const plan = await updatePlan({
-    userId: session.user.id,
-    planId,
-    familyName: parsed.data.familyName,
-    locale: parsed.data.locale,
-    answersJson: parsed.data.answersJson,
-    generatedPlanJson: parsed.data.generatedPlanJson as any,
-    notes: parsed.data.notes || undefined,
-  });
-
-  return { ok: true as const, id: plan.id, version: plan.version };
 }

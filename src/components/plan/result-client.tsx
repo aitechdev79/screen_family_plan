@@ -24,6 +24,9 @@ export function ResultClient({ locale = "vi", existingPlanId }: { locale?: strin
   const questionnaireHref = existingPlanId
     ? `/${locale}/dashboard/plans/${existingPlanId}/edit`
     : `/${locale}/plan/new`;
+  const currentPreviewHref = existingPlanId
+    ? `/${locale}/dashboard/plans/${existingPlanId}/edit?preview=1`
+    : `/${locale}/plan/result`;
 
   useEffect(() => {
     const raw = window.sessionStorage.getItem(RESULT_KEY);
@@ -58,7 +61,12 @@ export function ResultClient({ locale = "vi", existingPlanId }: { locale?: strin
           });
 
       if (!result.ok) {
-        setError(text.resultClient.saveError);
+        if (result.error === "Unauthorized") {
+          router.push(`/${locale}/auth/login?callbackUrl=${encodeURIComponent(currentPreviewHref)}`);
+          return;
+        }
+
+        setError(`${text.resultClient.saveError} ${result.error}`);
         return;
       }
 
