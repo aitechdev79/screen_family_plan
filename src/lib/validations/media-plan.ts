@@ -27,9 +27,23 @@ export const childInputSchema = z.object({
       "social_media",
     ]),
   ),
+  crowdingOut: z.array(
+    z.enum([
+      "sleep",
+      "homework",
+      "physical_activity",
+      "reading",
+      "family_time",
+      "in_person_socializing",
+    ]),
+  ),
   hasDeviceInBedroom: z.boolean(),
   usesScreenForCalming: z.boolean(),
   hasPersonalDevice: z.boolean(),
+  hasAutoplayOrEndlessScroll: z.boolean(),
+  notificationsDisrupt: z.boolean(),
+  chatsWithUnknownPeople: z.boolean(),
+  coEngagementLevel: z.enum(["rarely", "sometimes", "often"]),
 });
 
 export const familyInputSchema = z.object({

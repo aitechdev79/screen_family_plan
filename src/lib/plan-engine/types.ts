@@ -26,6 +26,16 @@ export type UsageType =
   | "social_media"
   | "mixed";
 
+export type CrowdingOutArea =
+  | "sleep"
+  | "homework"
+  | "physical_activity"
+  | "reading"
+  | "family_time"
+  | "in_person_socializing";
+
+export type CoEngagementLevel = "rarely" | "sometimes" | "often";
+
 export type Domain =
   | "media_balance"
   | "communication"
@@ -54,9 +64,14 @@ export interface ChildInput {
   screenHoursWeekend: number;
   mainUsage: UsageType[];
   concerns: Concern[];
+  crowdingOut: CrowdingOutArea[];
   hasDeviceInBedroom: boolean;
   usesScreenForCalming: boolean;
   hasPersonalDevice: boolean;
+  hasAutoplayOrEndlessScroll: boolean;
+  notificationsDisrupt: boolean;
+  chatsWithUnknownPeople: boolean;
+  coEngagementLevel: CoEngagementLevel;
 }
 
 export interface FamilyInput {
@@ -80,6 +95,10 @@ export interface ActionTemplate {
     | "has_personal_device"
     | "high_weekday_screen"
     | "high_weekend_screen"
+    | "autoplay_or_endless_scroll"
+    | "notifications_disrupt"
+    | "stranger_contact"
+    | "low_co_engagement"
   >;
   goals?: FamilyGoal[];
   weight: number;
@@ -101,6 +120,7 @@ export interface ChildPlan {
   nickname: string;
   ageBand: AgeBand;
   priorityAreas: string[];
+  crowdingOutAreas: string[];
   recommendedActions: RecommendedAction[];
   optionalActions: RecommendedAction[];
   dailyRhythm: Array<{

@@ -1,65 +1,127 @@
 import { ChildInput } from "./types";
 
-export function buildDailyRhythm(child: ChildInput): Array<{
+type RhythmItem = {
   label: string;
   recommendation: string;
-}> {
-  const items = [];
+};
 
-  if (child.ageBand === "0-5") {
-    items.push(
+export function buildDailyRhythm(
+  child: ChildInput,
+  locale: "vi" | "en",
+): RhythmItem[] {
+  if (locale === "vi") {
+    if (child.ageBand === "0-5") {
+      return [
+        {
+          label: "Buoi sang",
+          recommendation:
+            "Uu tien an sang, van dong, doc sach va tuong tac truc tiep; tranh giai tri bang man hinh.",
+        },
+        {
+          label: "Ban ngay",
+          recommendation:
+            "Neu dung man hinh, uu tien noi dung ngan, chat luong cao va co nguoi lon cung tham gia.",
+        },
+        {
+          label: "Buoi toi",
+          recommendation:
+            "Chuyen dan sang choi tu do, doc sach, tro chuyen; dung man hinh it nhat 1 gio truoc khi ngu.",
+        },
+      ];
+    }
+
+    if (child.ageBand === "6-12") {
+      return [
+        {
+          label: "Truoc gio hoc",
+          recommendation: "Khong dung man hinh giai tri truoc khi den truong.",
+        },
+        {
+          label: "Sau gio hoc",
+          recommendation:
+            "Hoan thanh bai tap, van dong hoac viec nha truoc khi dung man hinh giai tri.",
+        },
+        {
+          label: "Buoi toi",
+          recommendation:
+            "Dung man hinh trong khung gio ro rang, tat thong bao va dung it nhat 1 gio truoc khi ngu.",
+        },
+      ];
+    }
+
+    return [
       {
-        label: "Morning",
+        label: "Buoi sang",
         recommendation:
-          "Ưu tiên ăn sáng, chuẩn bị, vận động và tương tác trực tiếp; tránh giải trí bằng màn hình.",
+          "Tranh luot dien thoai ngay sau khi thuc day; uu tien chuan bi cho ngay moi.",
       },
       {
-        label: "After school / daytime",
+        label: "Sau gio hoc",
         recommendation:
-          "Nếu dùng màn hình, ưu tiên nội dung ngắn, chất lượng cao và có cha mẹ cùng tham gia.",
+          "Tach ro thoi gian hoc, giai tri va mang xa hoi; uu tien tung man hinh mot.",
       },
       {
-        label: "Evening",
+        label: "Buoi toi",
         recommendation:
-          "Chuyển dần sang chơi tự do, đọc sách, trò chuyện; tránh màn hình trước giờ ngủ 1 giờ.",
-      }
-    );
-  } else if (child.ageBand === "6-12") {
-    items.push(
-      {
-        label: "Before school",
-        recommendation: "Không dùng màn hình giải trí trước giờ học.",
+          "Bat do-not-disturb, tranh feed vo tan va dung man hinh it nhat 1 gio truoc khi ngu.",
       },
-      {
-        label: "After school",
-        recommendation:
-          "Hoàn thành bài tập, vận động hoặc việc nhà trước khi dùng màn hình giải trí.",
-      },
-      {
-        label: "Evening",
-        recommendation:
-          "Chỉ dùng màn hình trong khung giờ rõ ràng; dừng ít nhất 1 giờ trước ngủ.",
-      }
-    );
-  } else {
-    items.push(
-      {
-        label: "Morning",
-        recommendation:
-          "Tránh lướt điện thoại ngay sau khi thức dậy; ưu tiên chuẩn bị cho ngày mới.",
-      },
-      {
-        label: "After school",
-        recommendation:
-          "Tách rõ thời gian học, giải trí, và mạng xã hội; dùng từng màn hình một.",
-      },
-      {
-        label: "Night",
-        recommendation:
-          "Bật do-not-disturb và tránh màn hình 1 giờ trước ngủ khi có thể.",
-      }
-    );
+    ];
   }
 
-  return items;
+  if (child.ageBand === "0-5") {
+    return [
+      {
+        label: "Morning",
+        recommendation:
+          "Prioritize breakfast, movement, books, and face-to-face interaction before entertainment media.",
+      },
+      {
+        label: "Daytime",
+        recommendation:
+          "If screens are used, keep them brief, high-quality, and shared with a caregiver whenever possible.",
+      },
+      {
+        label: "Evening",
+        recommendation:
+          "Shift toward free play, reading, and calm routines; stop screens at least an hour before sleep.",
+      },
+    ];
+  }
+
+  if (child.ageBand === "6-12") {
+    return [
+      {
+        label: "Before school",
+        recommendation: "Avoid entertainment screens before school.",
+      },
+      {
+        label: "After school",
+        recommendation:
+          "Finish homework, movement, or chores before entertainment media starts.",
+      },
+      {
+        label: "Evening",
+        recommendation:
+          "Use a clear entertainment window, quiet notifications, and end screens at least an hour before bed.",
+      },
+    ];
+  }
+
+  return [
+    {
+      label: "Morning",
+      recommendation:
+        "Avoid phone scrolling right after waking; start with preparation, food, and real-world routines.",
+    },
+    {
+      label: "After school",
+      recommendation:
+        "Separate study time, entertainment, and social feeds; keep to one screen at a time.",
+    },
+    {
+      label: "Night",
+      recommendation:
+        "Use do-not-disturb, charge devices outside the bedroom when possible, and stop screens an hour before sleep.",
+    },
+  ];
 }

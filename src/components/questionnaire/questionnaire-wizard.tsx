@@ -18,9 +18,14 @@ const EMPTY_CHILD = () => ({
   screenHoursWeekend: 3,
   mainUsage: ["mixed"] as FamilyInput["children"][number]["mainUsage"],
   concerns: [] as FamilyInput["children"][number]["concerns"],
+  crowdingOut: [] as FamilyInput["children"][number]["crowdingOut"],
   hasDeviceInBedroom: false,
   usesScreenForCalming: false,
   hasPersonalDevice: false,
+  hasAutoplayOrEndlessScroll: false,
+  notificationsDisrupt: false,
+  chatsWithUnknownPeople: false,
+  coEngagementLevel: "sometimes" as const,
 });
 
 const DEFAULT_VALUES: FamilyInput = {
@@ -36,6 +41,21 @@ type WizardProps = {
   existingPlanId?: string;
 };
 
+function normalizeFamilyInput(input: FamilyInput): FamilyInput {
+  return {
+    ...input,
+    children: input.children.map((child) => ({
+      ...EMPTY_CHILD(),
+      ...child,
+      crowdingOut: child.crowdingOut ?? [],
+      hasAutoplayOrEndlessScroll: child.hasAutoplayOrEndlessScroll ?? false,
+      notificationsDisrupt: child.notificationsDisrupt ?? false,
+      chatsWithUnknownPeople: child.chatsWithUnknownPeople ?? false,
+      coEngagementLevel: child.coEngagementLevel ?? "sometimes",
+    })),
+  };
+}
+
 function toggle<T extends string>(list: T[], item: T) {
   return list.includes(item) ? list.filter((v) => v !== item) : [...list, item];
 }
@@ -45,7 +65,9 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState<FamilyInput>(initialInput ?? { ...DEFAULT_VALUES, locale });
+  const [form, setForm] = useState<FamilyInput>(
+    initialInput ? normalizeFamilyInput(initialInput) : { ...DEFAULT_VALUES, locale },
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -53,7 +75,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
     const cached = window.localStorage.getItem(STORAGE_KEY);
     if (cached) {
       try {
-        setForm(JSON.parse(cached));
+        setForm(normalizeFamilyInput(JSON.parse(cached)));
       } catch {}
     }
   }, [initialInput]);
@@ -98,6 +120,8 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
   const deviceOptions = Object.entries(text.devicesOptions).map(([value, label]) => ({ value, label }));
   const usageOptions = Object.entries(text.usageOptions).map(([value, label]) => ({ value, label }));
   const concernOptions = Object.entries(text.concernOptions).map(([value, label]) => ({ value, label }));
+  const crowdingOutOptions = Object.entries(text.crowdingOutOptions).map(([value, label]) => ({ value, label }));
+  const coEngagementOptions = Object.entries(text.coEngagementOptions).map(([value, label]) => ({ value, label }));
 
   return (
     <div className="space-y-6">
@@ -193,16 +217,52 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                 values={child.concerns}
                 onToggle={(value) => updateChild(index, { concerns: toggle(child.concerns as string[], value as string) as any })}
               />
+              <CheckboxGrid
+                label={text.crowdingOut}
+                items={crowdingOutOptions}
+                values={child.crowdingOut}
+                onToggle={(value) => updateChild(index, { crowdingOut: toggle(child.crowdingOut as string[], value as string) as any })}
+              />
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <NumberField label={text.weekdayHours} value={child.screenHoursWeekday} onChange={(value) => updateChild(index, { screenHoursWeekday: value })} />
                 <NumberField label={text.weekendHours} value={child.screenHoursWeekend} onChange={(value) => updateChild(index, { screenHoursWeekend: value })} />
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div>
+                <label className="mb-1 block text-sm font-medium">{text.coEngagementLevel}</label>
+                <select
+                  className="w-full rounded-xl border px-3 py-2"
+                  value={child.coEngagementLevel}
+                  onChange={(e) => updateChild(index, { coEngagementLevel: e.target.value as any })}
+                >
+                  {coEngagementOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 <ToggleField label={text.bedroomDevice} checked={child.hasDeviceInBedroom} onChange={(checked) => updateChild(index, { hasDeviceInBedroom: checked })} />
                 <ToggleField label={text.calming} checked={child.usesScreenForCalming} onChange={(checked) => updateChild(index, { usesScreenForCalming: checked })} />
                 <ToggleField label={text.personalDevice} checked={child.hasPersonalDevice} onChange={(checked) => updateChild(index, { hasPersonalDevice: checked })} />
+                <ToggleField
+                  label={text.autoplay}
+                  checked={child.hasAutoplayOrEndlessScroll}
+                  onChange={(checked) => updateChild(index, { hasAutoplayOrEndlessScroll: checked })}
+                />
+                <ToggleField
+                  label={text.notificationsDisrupt}
+                  checked={child.notificationsDisrupt}
+                  onChange={(checked) => updateChild(index, { notificationsDisrupt: checked })}
+                />
+                <ToggleField
+                  label={text.strangerContact}
+                  checked={child.chatsWithUnknownPeople}
+                  onChange={(checked) => updateChild(index, { chatsWithUnknownPeople: checked })}
+                />
               </div>
             </div>
           ))}
