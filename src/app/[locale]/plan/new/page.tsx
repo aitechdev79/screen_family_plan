@@ -1,22 +1,17 @@
-import { NewPlanForm } from "@/components/plan/new-plan-form";
+import { QuestionnaireWizard } from "@/components/questionnaire/questionnaire-wizard";
+import { getUIText } from "@/lib/i18n/ui-text";
 
-export default function NewPlanPage() {
+export default async function NewPlanPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const text = getUIText(locale).planPage;
+
   return (
-    <main className="mx-auto min-h-screen max-w-6xl space-y-8 bg-neutral-50 p-6 md:p-10">
-      <header className="max-w-3xl space-y-3">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
-          Family media plan
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight text-neutral-950">
-          Create a household screen-use plan from a structured questionnaire
-        </h1>
-        <p className="text-base text-neutral-600">
-          This form collects goals, child profiles, media habits, and risk factors, then sends
-          the payload to <code>/api/plan/generate</code> and opens the generated result view.
-        </p>
-      </header>
-
-      <NewPlanForm />
+    <main className="mx-auto max-w-5xl p-6">
+      <div className="mb-6 space-y-2">
+        <h1 className="text-4xl font-bold tracking-tight">{text.newTitle}</h1>
+        <p className="text-neutral-600">{text.newDescription}</p>
+      </div>
+      <QuestionnaireWizard locale={locale as "vi" | "en"} />
     </main>
   );
 }

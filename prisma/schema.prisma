@@ -8,51 +8,133 @@ datasource db {
 }
 
 model User {
-  id           String      @id @default(cuid())
-  name         String?
-  email        String?     @unique
-  passwordHash String?
-  locale       String      @default("vi")
-  role         String      @default("USER")
-  mediaPlans   MediaPlan[]
-  children     ChildProfile[]
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id            String      @id @default(cuid())
+  name          String?
+  email         String      @unique
+  passwordHash  String
+  locale        String      @default("vi")
+  role          String      @default("USER")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  children      ChildProfile[]
+  mediaPlans    MediaPlan[]
+  sharedTokens  PlanShareToken[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?   @db.Text
+  access_token      String?   @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?   @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([sessionToken])
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@id([identifier, token])
 }
 
 model ChildProfile {
-  id                   String     @id @default(cuid())
+  id                   String            @id @default(cuid())
   userId               String
-  user                 User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                 User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   nickname             String
   ageBand              String
   devicesJson          Json
   concernsJson         Json
-  hasDeviceInBedroom   Boolean    @default(false)
-  usesScreenForCalming Boolean    @default(false)
-  hasPersonalDevice    Boolean    @default(false)
-  mediaPlans           MediaPlan[]
-  createdAt            DateTime   @default(now())
-  updatedAt            DateTime   @updatedAt
+  screenHoursWeekday   Float
+  screenHoursWeekend   Float
+  mainUsageJson        Json
+  hasDeviceInBedroom   Boolean           @default(false)
+  usesScreenForCalming Boolean           @default(false)
+  hasPersonalDevice    Boolean           @default(false)
+  mediaPlans           MediaPlanChild[]
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
 
   @@index([userId])
 }
 
 model MediaPlan {
-  id                String        @id @default(cuid())
-  userId            String?
-  user              User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
-  childProfileId    String?
-  childProfile      ChildProfile? @relation(fields: [childProfileId], references: [id], onDelete: SetNull)
+  id                String            @id @default(cuid())
+  userId            String
+  user              User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   familyName        String
-  locale            String        @default("vi")
-  status            String        @default("draft")
+  locale            String            @default("vi")
+  status            String            @default("draft")
+  title             String?
   answersJson       Json
   generatedPlanJson Json
-  version           Int           @default(1)
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
+  notes             String?           @db.Text
+  version           Int               @default(1)
+  versions          MediaPlanVersion[]
+  children          MediaPlanChild[]
+  shareTokens       PlanShareToken[]
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 
-  @@index([userId])
+  @@index([userId, updatedAt])
+}
+
+model MediaPlanChild {
+  mediaPlanId    String
+  childProfileId String
+  mediaPlan      MediaPlan   @relation(fields: [mediaPlanId], references: [id], onDelete: Cascade)
+  childProfile   ChildProfile @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+
+  @@id([mediaPlanId, childProfileId])
   @@index([childProfileId])
+}
+
+model MediaPlanVersion {
+  id                String   @id @default(cuid())
+  mediaPlanId       String
+  mediaPlan         MediaPlan @relation(fields: [mediaPlanId], references: [id], onDelete: Cascade)
+  version           Int
+  answersJson       Json
+  generatedPlanJson Json
+  createdAt         DateTime @default(now())
+
+  @@index([mediaPlanId, version])
+}
+
+model PlanShareToken {
+  id         String    @id @default(cuid())
+  token      String    @unique
+  mediaPlanId String
+  mediaPlan  MediaPlan @relation(fields: [mediaPlanId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([mediaPlanId])
+  @@index([userId])
 }
