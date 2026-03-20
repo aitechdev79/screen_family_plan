@@ -8,7 +8,7 @@ export function PrintButton({ locale = "vi" }: { locale?: string }) {
   return (
     <button
       onClick={() => window.print()}
-      className="rounded-xl bg-neutral-900 px-4 py-2 text-white print:hidden"
+      className="inline-flex items-center justify-center rounded-full bg-[var(--orange-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(245,158,66,0.22)] transition hover:-translate-y-0.5 print:hidden"
     >
       {text.printButton}
     </button>

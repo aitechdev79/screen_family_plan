@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { StatePanel } from "@/components/layout/state-panel";
 import { getUserPlanById } from "@/lib/server/plan-repository";
 import { ResultView } from "@/components/plan/result-view";
 import { PrintButton } from "@/components/plan/print-button";
@@ -9,21 +10,53 @@ export default async function PrintPlanPage({ params }: { params: Promise<{ loca
   const text = getUIText(locale);
   const session = await auth();
 
-  if (!session?.user?.id) return <main className="p-6">{text.common.unauthorized}</main>;
+  if (!session?.user?.id) {
+    return (
+      <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)]" />
+        <StatePanel
+          eyebrow="Access required"
+          title={text.detail.printButton}
+          description={text.common.unauthorized}
+          actionHref={`/${locale}/auth/login?callbackUrl=/${locale}/dashboard/plans/${id}/print`}
+          actionLabel={text.auth.loginButton}
+        />
+      </main>
+    );
+  }
 
   const plan = await getUserPlanById(session.user.id, id);
-  if (!plan) return <main className="p-6">{text.common.planNotFound}</main>;
+  if (!plan) {
+    return (
+      <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)]" />
+        <StatePanel
+          eyebrow="Missing plan"
+          title={text.common.planNotFound}
+          description="The plan you were trying to print could not be found."
+          actionHref={`/${locale}/dashboard/plans`}
+          actionLabel={text.dashboard.title}
+        />
+      </main>
+    );
+  }
 
   return (
-    <main className="mx-auto max-w-6xl bg-white p-6 print:max-w-none print:p-0">
-      <div className="mb-6 flex items-center justify-between border-b pb-4 print:hidden">
-        <div>
-          <h1 className="text-2xl font-bold">{plan.familyName}</h1>
-          <p className="text-sm text-neutral-600">{text.common.versionLabel} {plan.version}</p>
+    <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14 print:max-w-none print:bg-white print:p-0">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)] print:hidden" />
+      <div className="mx-auto max-w-7xl print:max-w-none">
+        <div className="mb-6 flex flex-col gap-5 rounded-[1.8rem] bg-white/88 p-6 shadow-[0_18px_36px_rgba(17,24,39,0.05)] sm:flex-row sm:items-center sm:justify-between print:hidden">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Printable version</p>
+            <h1 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)]">{plan.familyName}</h1>
+            <p className="mt-2 text-sm text-[var(--ink-soft)]">
+              {text.common.versionLabel} {plan.version}
+            </p>
+          </div>
+          <PrintButton locale={locale} />
         </div>
-        <PrintButton locale={locale} />
+        <ResultView plan={plan.generatedPlanJson as any} locale={locale} />
       </div>
-      <ResultView plan={plan.generatedPlanJson as any} locale={locale} />
     </main>
   );
 }

@@ -49,21 +49,45 @@ export function RegisterForm({ locale = "vi" }: { locale?: string }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border p-6">
+    <form onSubmit={onSubmit} className="space-y-5">
       <div>
-        <label className="mb-1 block text-sm font-medium">{text.displayName}</label>
-        <input className="w-full rounded-xl border px-3 py-2" value={name} onChange={(e) => setName(e.target.value)} />
+        <label className="mb-2 block text-sm font-semibold text-[var(--ink-strong)]">{text.displayName}</label>
+        <input
+          className="w-full rounded-2xl border border-black/8 bg-white px-4 py-3 text-[15px] text-[var(--ink-strong)] outline-none transition placeholder:text-[var(--ink-soft)]/70 focus:border-[rgba(31,110,106,0.34)] focus:ring-4 focus:ring-[rgba(108,198,184,0.16)]"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium">{text.emailLabel}</label>
-        <input className="w-full rounded-xl border px-3 py-2" value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
+        <label className="mb-2 block text-sm font-semibold text-[var(--ink-strong)]">{text.emailLabel}</label>
+        <input
+          className="w-full rounded-2xl border border-black/8 bg-white px-4 py-3 text-[15px] text-[var(--ink-strong)] outline-none transition placeholder:text-[var(--ink-soft)]/70 focus:border-[rgba(31,110,106,0.34)] focus:ring-4 focus:ring-[rgba(108,198,184,0.16)]"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          required
+        />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium">{text.passwordLabel}</label>
-        <input className="w-full rounded-xl border px-3 py-2" value={password} onChange={(e) => setPassword(e.target.value)} type="password" minLength={8} required />
+        <label className="mb-2 block text-sm font-semibold text-[var(--ink-strong)]">{text.passwordLabel}</label>
+        <input
+          className="w-full rounded-2xl border border-black/8 bg-white px-4 py-3 text-[15px] text-[var(--ink-strong)] outline-none transition placeholder:text-[var(--ink-soft)]/70 focus:border-[rgba(31,110,106,0.34)] focus:ring-4 focus:ring-[rgba(108,198,184,0.16)]"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          minLength={8}
+          required
+        />
       </div>
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
-      <button disabled={isPending} className="rounded-xl bg-neutral-900 px-4 py-2 text-white disabled:opacity-60">
+      {error ? (
+        <p className="rounded-2xl border border-[rgba(184,79,72,0.18)] bg-[rgba(184,79,72,0.08)] px-4 py-3 text-sm text-[#9c4039]">
+          {error}
+        </p>
+      ) : null}
+      <button
+        disabled={isPending}
+        className="inline-flex w-full items-center justify-center rounded-full bg-[var(--teal-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(31,110,106,0.18)] transition hover:-translate-y-0.5 disabled:opacity-60"
+      >
         {isPending ? text.registerLoading : text.registerButton}
       </button>
     </form>

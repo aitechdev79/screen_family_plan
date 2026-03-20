@@ -77,9 +77,12 @@ export function ResultClient({ locale = "vi", existingPlanId }: { locale?: strin
 
   if (error) {
     return (
-      <div className="space-y-4">
-        <p className="text-red-600">{error}</p>
-        <Link href={questionnaireHref} className="inline-flex rounded-xl bg-neutral-900 px-4 py-2 text-white">
+      <div className="space-y-5 rounded-[1.8rem] border border-[rgba(184,79,72,0.16)] bg-[rgba(255,255,255,0.86)] p-6 shadow-[0_18px_36px_rgba(17,24,39,0.05)]">
+        <p className="text-sm font-medium text-[#9c4039]">{error}</p>
+        <Link
+          href={questionnaireHref}
+          className="inline-flex rounded-full bg-[var(--teal-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(31,110,106,0.18)]"
+        >
           {text.resultClient.backToQuestionnaire}
         </Link>
       </div>
@@ -87,16 +90,59 @@ export function ResultClient({ locale = "vi", existingPlanId }: { locale?: strin
   }
 
   if (!payload) {
-    return <p>{text.resultClient.loadingPreview}</p>;
+    return (
+      <div className="rounded-[1.8rem] bg-white/86 p-6 text-sm text-[var(--ink-soft)] shadow-[0_18px_36px_rgba(17,24,39,0.05)]">
+        {text.resultClient.loadingPreview}
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
+      <div className="rounded-[1.8rem] bg-[linear-gradient(135deg,_rgba(31,110,106,1),_rgba(48,136,128,0.96))] p-6 text-white shadow-[0_22px_50px_rgba(31,110,106,0.18)] print:hidden">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/68">Generated preview</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">
+              Review the plan, then save it to your account.
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-white/78">
+              This preview is based on the assessment answers currently stored in your session. You can go back and
+              edit the questionnaire before saving if anything looks off.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              onClick={saveOrUpdate}
+              disabled={isPending}
+              className="inline-flex items-center justify-center rounded-full bg-[var(--orange-strong)] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(245,158,66,0.22)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
+            >
+              {isPending ? text.resultClient.saving : existingPlanId ? text.resultClient.saveUpdate : text.resultClient.saveAccount}
+            </button>
+            <Link
+              href={questionnaireHref}
+              className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-3 text-sm font-semibold text-white/92 transition hover:bg-white/6"
+            >
+              {text.resultClient.editQuestionnaire}
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-wrap gap-3 print:hidden">
-        <button onClick={saveOrUpdate} disabled={isPending} className="rounded-xl bg-neutral-900 px-4 py-2 text-white disabled:opacity-50">
+        <button
+          onClick={saveOrUpdate}
+          disabled={isPending}
+          className="inline-flex items-center justify-center rounded-full bg-[var(--orange-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(245,158,66,0.22)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
+        >
           {isPending ? text.resultClient.saving : existingPlanId ? text.resultClient.saveUpdate : text.resultClient.saveAccount}
         </button>
-        <Link href={questionnaireHref} className="rounded-xl border px-4 py-2">{text.resultClient.editQuestionnaire}</Link>
+        <Link
+          href={questionnaireHref}
+          className="inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-semibold text-[var(--ink-strong)]"
+        >
+          {text.resultClient.editQuestionnaire}
+        </Link>
       </div>
       <ResultView plan={payload.generated} locale={locale} />
     </div>
