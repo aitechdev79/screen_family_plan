@@ -15,7 +15,7 @@ export default async function PlansDashboardPage({ params }: { params: Promise<{
       <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)]" />
         <StatePanel
-          eyebrow="Saved plans"
+          eyebrow="Kế hoạch đã lưu"
           title={text.dashboard.title}
           description={text.dashboard.loginRequired}
           actionHref={`/${locale}/auth/login?callbackUrl=/${locale}/dashboard/plans`}
@@ -34,7 +34,7 @@ export default async function PlansDashboardPage({ params }: { params: Promise<{
         <AppHeader locale={locale} primaryHref={`/${locale}/plan/new`} primaryLabel={text.dashboard.createNew} />
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Dashboard</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Bảng điều khiển</p>
             <h1 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)] sm:text-5xl">
               {text.dashboard.title}
             </h1>

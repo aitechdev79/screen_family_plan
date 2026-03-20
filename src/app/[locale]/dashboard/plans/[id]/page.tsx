@@ -16,7 +16,7 @@ export default async function PlanDetailPage({ params }: { params: Promise<{ loc
       <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)]" />
         <StatePanel
-          eyebrow="Access required"
+          eyebrow="Cần đăng nhập"
           title={text.dashboard.title}
           description={text.common.unauthorized}
           actionHref={`/${locale}/auth/login?callbackUrl=/${locale}/dashboard/plans/${id}`}
@@ -32,9 +32,9 @@ export default async function PlanDetailPage({ params }: { params: Promise<{ loc
       <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)]" />
         <StatePanel
-          eyebrow="Missing plan"
+          eyebrow="Không tìm thấy kế hoạch"
           title={text.common.planNotFound}
-          description="The saved plan could not be loaded or may no longer be available."
+          description="Kế hoạch đã lưu không thể tải được hoặc có thể không còn tồn tại."
           actionHref={`/${locale}/dashboard/plans`}
           actionLabel={text.dashboard.title}
         />
@@ -49,7 +49,7 @@ export default async function PlanDetailPage({ params }: { params: Promise<{ loc
         <AppHeader locale={locale} primaryHref={`/${locale}/dashboard/plans/${id}/edit`} primaryLabel={text.common.edit} />
         <div className="mb-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between print:hidden">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Saved plan</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Kế hoạch đã lưu</p>
             <h1 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)] sm:text-5xl">
               {plan.familyName}
             </h1>

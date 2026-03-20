@@ -23,7 +23,7 @@ export async function generatePlanPreviewAction(input: FamilyInput) {
 
 export async function savePlanAction(payload: {
   familyName: string;
-  locale: "vi" | "en";
+  locale: "vi";
   answersJson: FamilyInput;
   generatedPlanJson: unknown;
   notes?: string;
@@ -61,7 +61,7 @@ export async function updatePlanAction(
   planId: string,
   payload: {
     familyName: string;
-    locale: "vi" | "en";
+    locale: "vi";
     answersJson: FamilyInput;
     generatedPlanJson: unknown;
     notes?: string;

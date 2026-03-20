@@ -8,28 +8,28 @@ const templateVi: Record<string, { title: string; description: string }> = {
     description: "Tạo một hoạt động ngoại tuyến hằng ngày để cả gia đình cùng tham gia.",
   },
   track_screen_use_patterns: {
-    title: "Theo dõi những hoạt động số đang chiếm quá nhiều thời gian",
+    title: "Theo dõi những hoạt động media đang chiếm quá nhiều thời gian",
     description: "Nhìn rõ thời gian đang trôi vào đâu để đưa ra lựa chọn có chủ đích hơn.",
   },
   turn_off_unused_media: {
     title: "Tắt media khi không ai thực sự đang sử dụng",
-    description: "Giảm tiếng ồn nền và giảm việc tiếp xúc thụ động với màn hình.",
+    description: "Giảm media nền và việc tiếp xúc thụ động với màn hình.",
   },
   reduce_number_of_apps: {
-    title: "Giữ số lượng ứng dụng trên thiết bị ở mức gọn",
-    description: "Giảm cám dỗ, giảm xao nhãng và bớt thông báo không cần thiết.",
+    title: "Giữ số lượng ứng dụng trên thiết bị gia đình ở mức gọn",
+    description: "Giảm xao nhãng, cám dỗ và những thông báo không cần thiết.",
   },
   set_lock_screen_reminders: {
     title: "Dùng nhắc nhở trên màn hình khóa hoặc bộ hẹn giờ",
     description: "Dùng tín hiệu trực quan để giúp việc dừng lại dễ hơn.",
   },
   turn_off_autoplay_and_endless_feeds: {
-    title: "Tắt tự động phát và hạn chế feed cuộn vô tận",
-    description: "Loại bỏ những thiết kế khiến trẻ bị kéo quay lại liên tục.",
+    title: "Tắt tự động phát và hạn chế các feed cuộn vô tận",
+    description: "Loại bỏ những thiết kế khiến trẻ liên tục bị kéo quay lại.",
   },
   set_media_time_limits: {
     title: "Đặt giới hạn thời gian dùng media rõ ràng",
-    description: "Dùng ranh giới ổn định và dễ đoán cho media giải trí.",
+    description: "Dùng ranh giới dễ đoán và ổn định cho media giải trí.",
   },
   prevent_screen_from_interrupting_activity_eating: {
     title: "Không để media chen vào vận động và ăn uống lành mạnh",
@@ -133,7 +133,7 @@ const templateVi: Record<string, { title: string; description: string }> = {
   },
   delay_social_media_until_13: {
     title: "Hoãn mạng xã hội đến 13 tuổi hoặc muộn hơn, có đồng hành của cha mẹ",
-    description: "Trì hoãn quyền truy cập cho đến khi trẻ có mức sẵn sàng và giám sát phù hợp.",
+    description: "Trì hoãn quyền truy cập đến khi trẻ có mức sẵn sàng và giám sát phù hợp.",
   },
   choose_ok_screen_days: {
     title: "Chọn rõ những ngày nào được dùng màn hình giải trí",
@@ -144,12 +144,12 @@ const templateVi: Record<string, { title: string; description: string }> = {
     description: "Quy định điều gì diễn ra trước, trong và sau khi học bài.",
   },
   use_focus_modes_for_school_and_sleep: {
-    title: "Dùng chế độ tập trung hoặc không làm phiền cho học tập, thời gian gia đình và giấc ngủ",
+    title: "Dùng chế độ tập trung hoặc không làm phiền cho việc học, thời gian gia đình và giấc ngủ",
     description: "Tắt thông báo vào những lúc trẻ cần tập trung hoặc nghỉ ngơi.",
   },
   one_screen_at_a_time: {
     title: "Chỉ dùng một màn hình tại một thời điểm",
-    description: "Giảm đa nhiệm media và giảm quá tải.",
+    description: "Giảm đa nhiệm media và quá tải.",
   },
   avoid_screens_before_school: {
     title: "Tránh màn hình trước giờ đi học",
@@ -208,7 +208,7 @@ const templateVi: Record<string, { title: string; description: string }> = {
     description: "Thiết bị dùng chung giúp dễ đồng hành, giám sát và giữ ranh giới nhất quán hơn.",
   },
   play_games_watch_videos_together: {
-    title: "Chơi ứng dụng, chơi game hoặc xem video cùng nhau",
+    title: "Chơi ứng dụng, game hoặc xem video cùng nhau như một gia đình",
     description: "Biến trải nghiệm số thành điều mang tính gắn kết thay vì đơn độc.",
   },
 };
@@ -217,7 +217,7 @@ const reasonVi: Record<string, string> = {
   "Core recommendation for this age group": "Khuyến nghị nền tảng phù hợp với nhóm tuổi này",
   "Matches current concern(s)": "Phù hợp với mối lo hiện tại của gia đình",
   "Fits current media use pattern": "Khớp với kiểu sử dụng media hiện tại",
-  "Triggered by current family/device context": "Được kích hoạt bởi bối cảnh thiết bị hoặc thói quen hiện tại",
+  "Triggered by current family/device context": "Được kích hoạt bởi bối cảnh gia đình hoặc thiết bị hiện tại",
   "Supports stated family goals": "Hỗ trợ đúng mục tiêu gia đình đã chọn",
   "Protects an activity currently being crowded out": "Giúp bảo vệ hoạt động đang bị màn hình lấn chỗ",
   "Helps protect schoolwork and attention": "Giúp bảo vệ việc học và khả năng tập trung",
@@ -252,89 +252,36 @@ const crowdingOutVi: Record<string, string> = {
   in_person_socializing: "Kết nối trực tiếp ngoài đời",
 };
 
-export function localizeAction(template: ActionTemplate, locale: PlanLocale) {
-  if (locale === "vi") {
-    return templateVi[template.key] ?? {
-      title: template.title,
-      description: template.description,
-    };
-  }
-
-  return {
+export function localizeAction(template: ActionTemplate, _locale: PlanLocale) {
+  return templateVi[template.key] ?? {
     title: template.title,
     description: template.description,
   };
 }
 
-export function localizeReason(reason: string, locale: PlanLocale) {
-  if (locale === "vi") {
-    return reasonVi[reason] ?? reason;
-  }
-
-  return reason;
+export function localizeReason(reason: string, _locale: PlanLocale) {
+  return reasonVi[reason] ?? reason;
 }
 
-export function localizePriorityArea(concern: string, locale: PlanLocale) {
-  if (locale === "vi") {
-    return priorityAreaVi[concern] ?? concern;
-  }
-
-  const priorityAreaEn: Record<string, string> = {
-    sleep: "Sleep protection",
-    addiction: "Reduce compulsive use",
-    attention: "Focus and routines",
-    emotion: "Emotion regulation",
-    safety: "Digital safety",
-    content_quality: "Content quality",
-    gaming: "Healthy gaming",
-    overspending: "Spending boundaries",
-    social_media: "Social media readiness",
-  };
-
-  return priorityAreaEn[concern] ?? concern;
+export function localizePriorityArea(concern: string, _locale: PlanLocale) {
+  return priorityAreaVi[concern] ?? concern;
 }
 
-export function localizeCrowdingOutArea(item: string, locale: PlanLocale) {
-  if (locale === "vi") {
-    return crowdingOutVi[item] ?? item;
-  }
-
-  const crowdingOutEn: Record<string, string> = {
-    sleep: "Sleep",
-    homework: "Homework and school focus",
-    physical_activity: "Physical activity",
-    reading: "Reading",
-    family_time: "Family time",
-    in_person_socializing: "In-person connection",
-  };
-
-  return crowdingOutEn[item] ?? item;
+export function localizeCrowdingOutArea(item: string, _locale: PlanLocale) {
+  return crowdingOutVi[item] ?? item;
 }
 
 export function buildLocalizedOverallSummary(input: FamilyInput): GeneratedPlan["overallSummary"] {
   const summaries: string[] = [];
   const crowdingOut = new Set(input.children.flatMap((child) => child.crowdingOut));
   const goals = new Set(input.familyGoals);
-  const locale = input.locale;
 
   if (crowdingOut.has("sleep") || goals.has("sleep_better")) {
-    summaries.push(
-      locale === "vi"
-        ? "Kế hoạch này ưu tiên bảo vệ giấc ngủ và xây dựng nhịp buổi tối ổn định hơn."
-        : "This plan prioritizes sleep protection and calmer evening routines.",
-    );
+    summaries.push("Kế hoạch này ưu tiên bảo vệ giấc ngủ và xây dựng nhịp buổi tối ổn định hơn.");
   }
 
-  if (
-    crowdingOut.has("homework") ||
-    crowdingOut.has("physical_activity") ||
-    crowdingOut.has("reading")
-  ) {
-    summaries.push(
-      locale === "vi"
-        ? "Các đề xuất được thiết kế để kéo những hoạt động lành mạnh ngoài màn hình quay trở lại."
-        : "Recommendations are designed to crowd healthy offline activities back in.",
-    );
+  if (crowdingOut.has("homework") || crowdingOut.has("physical_activity") || crowdingOut.has("reading")) {
+    summaries.push("Các đề xuất được thiết kế để kéo những hoạt động lành mạnh ngoài màn hình quay trở lại.");
   }
 
   if (
@@ -345,27 +292,15 @@ export function buildLocalizedOverallSummary(input: FamilyInput): GeneratedPlan[
         child.chatsWithUnknownPeople,
     )
   ) {
-    summaries.push(
-      locale === "vi"
-        ? "Kế hoạch này xử lý cả rủi ro từ thiết kế nền tảng như tự động phát, thông báo và tiếp xúc không an toàn."
-        : "The plan addresses design risks like autoplay, notifications, and unsafe contact.",
-    );
+    summaries.push("Kế hoạch này xử lý cả rủi ro từ thiết kế nền tảng như tự động phát, thông báo và tiếp xúc không an toàn.");
   }
 
   if (goals.has("family_connection")) {
-    summaries.push(
-      locale === "vi"
-        ? "Kế hoạch này bổ sung các nhịp sinh hoạt chung và các cuộc trò chuyện giúp tăng kết nối gia đình."
-        : "The plan includes shared routines and conversations to strengthen family connection.",
-    );
+    summaries.push("Kế hoạch này bổ sung các nhịp sinh hoạt chung và các cuộc trò chuyện giúp tăng kết nối gia đình.");
   }
 
   if (summaries.length < 2) {
-    summaries.push(
-      locale === "vi"
-        ? "Các khuyến nghị được cá nhân hóa theo độ tuổi, mối lo, bối cảnh thiết bị và mục tiêu của gia đình."
-        : "Recommendations are personalized by age, concerns, device context, and family goals.",
-    );
+    summaries.push("Các khuyến nghị được cá nhân hóa theo độ tuổi, mối lo, bối cảnh thiết bị và mục tiêu của gia đình.");
   }
 
   return summaries.slice(0, 3);

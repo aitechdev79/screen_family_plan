@@ -37,29 +37,29 @@ const DEFAULT_VALUES: FamilyInput = {
 
 const STEP_INTROS = [
   {
-    eyebrow: "Household profile",
-    title: "Start with the family context",
-    description: "Name the household so the generated plan feels grounded and easier to revisit later.",
+    eyebrow: "Hồ sơ gia đình",
+    title: "Bắt đầu từ bối cảnh của gia đình",
+    description: "Đặt tên cho gia đình để bản kế hoạch tạo ra rõ ràng hơn và dễ xem lại về sau.",
   },
   {
-    eyebrow: "Desired outcomes",
-    title: "Choose what matters most right now",
-    description: "Focus on the few outcomes that would make day-to-day media use feel calmer and more manageable.",
+    eyebrow: "Kết quả mong muốn",
+    title: "Chọn điều quan trọng nhất lúc này",
+    description: "Tập trung vào vài mục tiêu thật sự giúp việc dùng media hằng ngày bớt căng thẳng và dễ quản lý hơn.",
   },
   {
-    eyebrow: "Child routines",
-    title: "Capture habits child by child",
-    description: "The plan becomes much more useful when device patterns and pressure points are separated by child.",
+    eyebrow: "Thói quen của trẻ",
+    title: "Ghi nhận thói quen theo từng trẻ",
+    description: "Kế hoạch sẽ hữu ích hơn nhiều khi thói quen thiết bị và các điểm căng thẳng được tách riêng cho từng trẻ.",
   },
   {
-    eyebrow: "Final review",
-    title: "Check the summary before generation",
-    description: "Confirm the essentials, then generate a structured preview that can be saved, edited, and printed.",
+    eyebrow: "Rà soát cuối",
+    title: "Kiểm tra tóm tắt trước khi tạo",
+    description: "Xác nhận các thông tin chính rồi tạo bản xem trước có cấu trúc để lưu, chỉnh sửa và in.",
   },
 ] as const;
 
 type WizardProps = {
-  locale?: "vi" | "en";
+  locale?: string;
   initialInput?: FamilyInput;
   existingPlanId?: string;
 };
@@ -114,12 +114,13 @@ function fieldBaseClass() {
 }
 
 export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanId }: WizardProps) {
-  const text = getUIText(locale).questionnaire;
+  const effectiveLocale = "vi";
+  const text = getUIText(effectiveLocale).questionnaire;
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState<FamilyInput>(
-    initialInput ? normalizeFamilyInput(initialInput) : { ...DEFAULT_VALUES, locale },
+    initialInput ? normalizeFamilyInput(initialInput) : { ...DEFAULT_VALUES, locale: "vi" },
   );
   const [error, setError] = useState<string | null>(null);
 
@@ -160,9 +161,9 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
       window.sessionStorage.setItem(RESULT_KEY, JSON.stringify({ input: form, generated }));
 
       if (existingPlanId) {
-        router.push(`/${locale}/dashboard/plans/${existingPlanId}/edit?preview=1`);
+        router.push(`/vi/dashboard/plans/${existingPlanId}/edit?preview=1`);
       } else {
-        router.push(`/${locale}/plan/result`);
+        router.push("/vi/plan/result");
       }
     } catch {
       setError(text.generateError);
@@ -183,11 +184,11 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
   return (
     <div className="grid gap-4 lg:grid-cols-[20rem_minmax(0,1fr)]">
       <aside className="rounded-[1.8rem] bg-[linear-gradient(160deg,_rgba(31,110,106,1),_rgba(48,136,128,0.96))] p-6 text-white shadow-[0_24px_60px_rgba(31,110,106,0.18)]">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/70">Plan builder</p>
-        <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">One guided assessment, one usable result.</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/70">Trình tạo kế hoạch</p>
+        <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Một bảng hỏi có hướng dẫn, một kết quả có thể dùng ngay.</h2>
         <p className="mt-4 text-sm leading-7 text-white/78">
-          Move through the steps in order. The generated plan will use these answers to set priorities, routines, and
-          family rules.
+          Đi theo từng bước theo đúng thứ tự. Kế hoạch được tạo sẽ dùng các câu trả lời này để xác định ưu tiên, nhịp
+          sinh hoạt và quy tắc gia đình.
         </p>
 
         <div className="mt-8 rounded-[1.5rem] bg-white/10 p-4">
@@ -220,7 +221,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-white">{label}</p>
                     <p className="mt-1 text-xs uppercase tracking-[0.16em] text-white/62">
-                      {isDone ? "Ready" : isActive ? "In progress" : "Pending"}
+                      {isDone ? "Đã đủ dữ liệu" : isActive ? "Đang thực hiện" : "Chưa làm"}
                     </p>
                   </div>
                 </div>
@@ -230,7 +231,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
         </div>
 
         <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-[rgba(255,255,255,0.06)] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/68">Progress</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/68">Tiến độ</p>
           <div className="mt-3 h-2 rounded-full bg-white/10">
             <div
               className="h-2 rounded-full bg-[var(--mint-soft)] transition-all"
@@ -238,7 +239,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
             />
           </div>
           <p className="mt-3 text-sm text-white/76">
-            {completionCount} of {text.steps.length} steps have enough detail to generate a plan.
+            {completionCount} / {text.steps.length} bước đã có đủ dữ liệu để tạo kế hoạch.
           </p>
         </div>
       </aside>
@@ -279,7 +280,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
               <p className="mt-2 max-w-2xl text-sm leading-7 text-[var(--ink-soft)]">{activeStepIntro.description}</p>
             </div>
             <div className="rounded-full bg-white px-4 py-2 text-sm font-medium text-[var(--ink-soft)] shadow-[0_10px_20px_rgba(17,24,39,0.05)]">
-              Step {step + 1} of {text.steps.length}
+              Bước {step + 1} / {text.steps.length}
             </div>
           </div>
         </div>
@@ -289,7 +290,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
             <section className="rounded-[1.7rem] border border-black/6 bg-white p-6 shadow-[0_16px_34px_rgba(17,24,39,0.04)]">
               <SectionTitle
                 title={text.familyInfo}
-                description="Set the household label used in the generated plan and saved versions."
+                description="Đặt tên gia đình sẽ được dùng trong bản kế hoạch tạo ra và các phiên bản đã lưu."
               />
               <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
                 <div>
@@ -297,14 +298,14 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                   <input
                     className={fieldBaseClass()}
                     value={form.familyName}
-                    placeholder="Nguyen family"
+                    placeholder="Gia đình Nguyễn"
                     onChange={(e) => setForm({ ...form, familyName: e.target.value })}
                   />
                 </div>
                 <div className="rounded-[1.5rem] bg-[var(--card-muted)] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Why this matters</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Vì sao phần này quan trọng</p>
                   <p className="mt-3 text-sm leading-7 text-[var(--ink-soft)]">
-                    A clear family name makes saved versions easier to scan, especially when plans are updated over time.
+                    Tên gia đình rõ ràng giúp bạn dễ nhận diện các bản đã lưu, nhất là khi kế hoạch được cập nhật theo thời gian.
                   </p>
                 </div>
               </div>
@@ -315,7 +316,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
             <section className="rounded-[1.7rem] border border-black/6 bg-white p-6 shadow-[0_16px_34px_rgba(17,24,39,0.04)]">
               <SectionTitle
                 title={text.goalsTitle}
-                description="Select the outcomes you want the plan to optimize for. A few focused goals usually produce a better result."
+                description="Chọn những kết quả bạn muốn kế hoạch ưu tiên. Một vài mục tiêu thật rõ thường cho ra bản kế hoạch tốt hơn."
               />
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {goalOptions.map((goal) => (
@@ -340,7 +341,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <SectionTitle
                   title={text.childInfoTitle}
-                  description="Build one profile per child so recommendations stay specific instead of averaging everyone together."
+                  description="Tạo một hồ sơ cho mỗi trẻ để khuyến nghị đủ cụ thể, thay vì gộp chung cho cả nhà."
                 />
                 <button
                   type="button"
@@ -369,7 +370,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="rounded-full bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]">
-                        {countSelectedFlags(child)} active flags
+                        {countSelectedFlags(child)} tín hiệu đang bật
                       </div>
                       {form.children.length > 1 ? (
                         <button
@@ -487,7 +488,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                   </div>
 
                   <div className="mt-6">
-                    <p className="mb-3 text-sm font-semibold text-[var(--ink-strong)]">Context flags</p>
+                    <p className="mb-3 text-sm font-semibold text-[var(--ink-strong)]">Các tín hiệu bối cảnh</p>
                     <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                       <ToggleField
                         label={text.bedroomDevice}
@@ -530,7 +531,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
             <section className="rounded-[1.7rem] border border-black/6 bg-white p-6 shadow-[0_16px_34px_rgba(17,24,39,0.04)]">
               <SectionTitle
                 title={text.review}
-                description="Use this final pass to confirm the household name, selected goals, and each child profile before generating the preview."
+                description="Rà soát lần cuối để xác nhận tên gia đình, mục tiêu đã chọn và hồ sơ từng trẻ trước khi tạo bản xem trước."
               />
               <div className="mt-6 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="space-y-4">
@@ -542,7 +543,7 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                   />
                 </div>
                 <div className="rounded-[1.5rem] bg-[var(--card-muted)] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Child profiles</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Hồ sơ trẻ</p>
                   <ul className="mt-4 space-y-3">
                     {form.children.map((child) => (
                       <li key={child.id} className="rounded-2xl bg-white px-4 py-4 shadow-[0_12px_24px_rgba(17,24,39,0.04)]">

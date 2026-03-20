@@ -48,7 +48,7 @@ export const childInputSchema = z.object({
 
 export const familyInputSchema = z.object({
   familyName: z.string().min(1).max(100),
-  locale: z.enum(["vi", "en"]),
+  locale: z.literal("vi"),
   familyGoals: z
     .array(
       z.enum([
@@ -67,7 +67,7 @@ export const familyInputSchema = z.object({
 
 export const mediaPlanSaveSchema = z.object({
   familyName: z.string().min(1).max(100),
-  locale: z.enum(["vi", "en"]),
+  locale: z.literal("vi"),
   answersJson: familyInputSchema,
   generatedPlanJson: z.record(z.any()),
   notes: z.string().max(2000).optional().or(z.literal("")),

@@ -76,7 +76,7 @@ export interface ChildInput {
 
 export interface FamilyInput {
   familyName: string;
-  locale: "vi" | "en";
+  locale: "vi";
   children: ChildInput[];
   familyGoals: FamilyGoal[];
 }
@@ -133,7 +133,7 @@ export interface ChildPlan {
 
 export interface GeneratedPlan {
   familyName: string;
-  locale: "vi" | "en";
+  locale: "vi";
   overallSummary: string[];
   children: ChildPlan[];
 }

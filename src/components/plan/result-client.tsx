@@ -47,14 +47,14 @@ export function ResultClient({ locale = "vi", existingPlanId }: { locale?: strin
       const result = existingPlanId
         ? await updatePlanAction(existingPlanId, {
             familyName: payload.input.familyName,
-            locale: locale === "en" ? "en" : "vi",
+            locale: "vi",
             answersJson: payload.input,
             generatedPlanJson: payload.generated,
             notes: "",
           })
         : await savePlanAction({
             familyName: payload.input.familyName,
-            locale: locale === "en" ? "en" : "vi",
+            locale: "vi",
             answersJson: payload.input,
             generatedPlanJson: payload.generated,
             notes: "",
@@ -102,13 +102,13 @@ export function ResultClient({ locale = "vi", existingPlanId }: { locale?: strin
       <div className="rounded-[1.8rem] bg-[linear-gradient(135deg,_rgba(31,110,106,1),_rgba(48,136,128,0.96))] p-6 text-white shadow-[0_22px_50px_rgba(31,110,106,0.18)] print:hidden">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/68">Generated preview</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/68">Bản xem trước đã tạo</p>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">
-              Review the plan, then save it to your account.
+              Xem lại kế hoạch rồi lưu vào tài khoản của bạn.
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/78">
-              This preview is based on the assessment answers currently stored in your session. You can go back and
-              edit the questionnaire before saving if anything looks off.
+              Bản xem trước này được tạo từ câu trả lời hiện đang lưu trong phiên làm việc. Bạn có thể quay lại chỉnh
+              bảng hỏi trước khi lưu nếu thấy có điểm nào chưa đúng.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">

@@ -3,51 +3,51 @@ import Link from "next/link";
 const steps = [
   {
     number: "01",
-    title: "Answer a few parent-focused questions",
+    title: "Trả lời một vài câu hỏi dành cho phụ huynh",
     description:
-      "Capture each child's age, routines, device habits, and the issues your family wants to improve first.",
+      "Ghi nhận độ tuổi, nhịp sinh hoạt, thói quen thiết bị và những vấn đề gia đình bạn muốn cải thiện trước tiên.",
   },
   {
     number: "02",
-    title: "Get a structured family media plan",
+    title: "Nhận kế hoạch media gia đình có cấu trúc",
     description:
-      "The app turns your inputs into practical priorities, daily rhythm suggestions, family rules, and parent tips.",
+      "Ứng dụng chuyển câu trả lời thành các ưu tiên thực tế, gợi ý nhịp sinh hoạt, quy tắc gia đình và lưu ý cho cha mẹ.",
   },
   {
     number: "03",
-    title: "Save, adjust, and print when needed",
+    title: "Lưu, điều chỉnh và in khi cần",
     description:
-      "Keep versions in your account, update the plan as routines change, and export a clean PDF for home use.",
+      "Lưu các phiên bản trong tài khoản, cập nhật kế hoạch khi nếp sinh hoạt thay đổi và xuất PDF gọn gàng để dùng tại nhà.",
   },
 ] as const;
 
 const outcomes = [
-  "Priority areas matched to each child",
-  "Daily rhythm guidance for school days and weekends",
-  "Family rules that are specific enough to follow",
-  "Parent tips that support consistency instead of conflict",
+  "Các vùng ưu tiên phù hợp với từng trẻ",
+  "Gợi ý nhịp sinh hoạt cho ngày đi học và cuối tuần",
+  "Quy tắc gia đình đủ cụ thể để áp dụng",
+  "Gợi ý cho cha mẹ giúp duy trì nhất quán thay vì xung đột",
 ] as const;
 
 const concerns = [
   {
-    title: "Sleep and overstimulation",
-    description: "Spot routines that keep screens too close to bedtime and replace them with clearer limits.",
+    title: "Giấc ngủ và quá tải kích thích",
+    description: "Nhận ra những thói quen khiến màn hình xuất hiện quá sát giờ ngủ và thay bằng giới hạn rõ ràng hơn.",
   },
   {
-    title: "Focus and homework friction",
-    description: "Identify when entertainment, short videos, or notifications are crowding out school attention.",
+    title: "Tập trung và xung đột quanh việc học",
+    description: "Xác định lúc giải trí, video ngắn hoặc thông báo đang lấn sang thời gian học và sự tập trung.",
   },
   {
-    title: "Safety and digital independence",
-    description: "Flag risky patterns like autoplay, stranger contact, bedroom devices, and personal-device drift.",
+    title: "An toàn và sự tự chủ trên môi trường số",
+    description: "Đánh dấu các mẫu hành vi rủi ro như tự động phát, liên hệ người lạ, thiết bị trong phòng ngủ và lệ thuộc thiết bị cá nhân.",
   },
 ] as const;
 
 const samplePlan = [
-  { label: "Priority areas", value: "Sleep, focus, content quality" },
-  { label: "Daily rhythm", value: "No short video before school, shared viewing after homework" },
-  { label: "Family rule", value: "Devices charge outside bedrooms after 8:30 PM" },
-  { label: "Parent tip", value: "Co-watch once a week and review what feels useful or draining" },
+  { label: "Vùng ưu tiên", value: "Giấc ngủ, tập trung, chất lượng nội dung" },
+  { label: "Nhịp sinh hoạt", value: "Không xem video ngắn trước giờ đi học, cùng xem sau khi xong bài" },
+  { label: "Quy tắc gia đình", value: "Thiết bị được sạc bên ngoài phòng ngủ sau 8:30 tối" },
+  { label: "Gợi ý cho cha mẹ", value: "Cùng xem một lần mỗi tuần và trao đổi điều gì hữu ích hoặc gây mệt mỏi" },
 ] as const;
 
 export default function HomePage() {
@@ -65,46 +65,32 @@ export default function HomePage() {
                 FM
               </div>
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Family Media Plan</p>
-                <p className="text-sm text-[var(--ink-soft)]">Calmer routines for modern households</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Kế Hoạch Media Gia Đình</p>
+                <p className="text-sm text-[var(--ink-soft)]">Nhịp dùng màn hình rõ ràng hơn cho gia đình hiện đại</p>
               </div>
             </Link>
 
             <nav className="hidden items-center gap-8 text-sm font-medium text-[var(--ink-soft)] lg:flex">
               <a href="#how-it-works" className="transition hover:text-[var(--ink-strong)]">
-                How it works
+                Cách hoạt động
               </a>
               <a href="#sample-plan" className="transition hover:text-[var(--ink-strong)]">
-                Sample output
+                Bản mẫu
               </a>
               <a href="#benefits" className="transition hover:text-[var(--ink-strong)]">
-                Benefits
+                Lợi ích
               </a>
               <Link href="/vi/auth/login" className="transition hover:text-[var(--ink-strong)]">
-                Sign in
+                Đăng nhập
               </Link>
             </nav>
 
             <div className="flex items-center gap-3">
-              <div className="hidden rounded-full border border-black/10 bg-white/80 p-1 sm:flex">
-                <Link
-                  href="/vi/plan/new"
-                  className="rounded-full bg-[var(--teal-strong)] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white"
-                >
-                  VI
-                </Link>
-                <Link
-                  href="/en/plan/new"
-                  className="rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ink-soft)]"
-                >
-                  EN
-                </Link>
-              </div>
               <Link
                 href="/vi/plan/new"
                 className="inline-flex items-center rounded-full bg-[var(--orange-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(245,158,66,0.35)] transition hover:-translate-y-0.5"
               >
-                Start assessment
+                Bắt đầu đánh giá
               </Link>
             </div>
           </div>
@@ -113,33 +99,33 @@ export default function HomePage() {
         <section className="mx-auto grid max-w-7xl gap-14 px-6 pb-16 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-24 lg:pt-20">
           <div>
             <div className="inline-flex items-center rounded-full border border-[rgba(31,110,106,0.12)] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--teal-strong)] shadow-[0_8px_24px_rgba(31,110,106,0.08)]">
-              Digital wellness for modern families
+              Sức khỏe số cho gia đình hiện đại
             </div>
             <h1 className="mt-6 max-w-3xl text-5xl font-semibold tracking-[-0.05em] text-[var(--ink-strong)] sm:text-6xl">
-              Build a clear media plan for your family in minutes.
+              Tạo kế hoạch media rõ ràng cho gia đình chỉ trong vài phút.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--ink-soft)]">
-              Designed for parents of children ages 5 to 18, this app turns everyday screen-time concerns into a
-              practical plan you can actually use at home.
+              Dành cho phụ huynh có con từ 5 đến 18 tuổi, ứng dụng này biến những lo lắng thường ngày về màn hình thành
+              một kế hoạch thực tế có thể áp dụng ngay tại nhà.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
               <Link
                 href="/vi/plan/new"
                 className="inline-flex items-center justify-center rounded-full bg-[var(--orange-strong)] px-7 py-4 text-base font-semibold text-white shadow-[0_14px_34px_rgba(245,158,66,0.32)] transition hover:-translate-y-0.5"
               >
-                Start free assessment
+                Bắt đầu đánh giá miễn phí
               </Link>
               <a
                 href="#sample-plan"
                 className="inline-flex items-center justify-center rounded-full border border-[rgba(30,36,48,0.12)] bg-white/80 px-7 py-4 text-base font-semibold text-[var(--ink-strong)] transition hover:border-[rgba(30,36,48,0.24)]"
               >
-                See sample plan
+                Xem bản mẫu
               </a>
             </div>
             <div className="mt-8 flex flex-wrap gap-3 text-sm font-medium text-[var(--ink-soft)]">
-              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">No setup required</span>
-              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Vietnamese and English</span>
-              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Printable PDF output</span>
+              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Không cần cài đặt</span>
+              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Trải nghiệm hoàn toàn bằng tiếng Việt</span>
+              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Xuất PDF để in</span>
             </div>
           </div>
 
@@ -148,16 +134,16 @@ export default function HomePage() {
             <div className="relative rounded-[2rem] border border-white/70 bg-[linear-gradient(145deg,_rgba(255,255,255,0.96),_rgba(250,247,239,0.88))] p-5 shadow-[0_30px_80px_rgba(31,110,106,0.15)]">
               <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
                 <div className="rounded-[1.6rem] bg-[var(--teal-strong)] p-5 text-white">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">Assessment snapshot</p>
-                  <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em]">Screen habits with context, not guesswork</h2>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">Tóm tắt đánh giá</p>
+                  <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em]">Hiểu thói quen màn hình theo bối cảnh, không đoán mò</h2>
                   <div className="mt-6 space-y-3">
                     <div className="rounded-2xl bg-white/12 p-4">
-                      <p className="text-xs uppercase tracking-[0.2em] text-white/65">Family goals</p>
-                      <p className="mt-2 text-sm leading-6">Sleep better, improve focus, safer media use</p>
+                      <p className="text-xs uppercase tracking-[0.2em] text-white/65">Mục tiêu gia đình</p>
+                      <p className="mt-2 text-sm leading-6">Ngủ tốt hơn, tập trung hơn, dùng media an toàn hơn</p>
                     </div>
                     <div className="rounded-2xl bg-white/12 p-4">
-                      <p className="text-xs uppercase tracking-[0.2em] text-white/65">Signals captured</p>
-                      <p className="mt-2 text-sm leading-6">Bedroom devices, autoplay, short video habits, school disruption</p>
+                      <p className="text-xs uppercase tracking-[0.2em] text-white/65">Tín hiệu được ghi nhận</p>
+                      <p className="mt-2 text-sm leading-6">Thiết bị trong phòng ngủ, tự động phát, thói quen video ngắn, ảnh hưởng việc học</p>
                     </div>
                   </div>
                 </div>
@@ -165,11 +151,11 @@ export default function HomePage() {
                 <div className="rounded-[1.6rem] bg-white p-5 shadow-[inset_0_0_0_1px_rgba(30,36,48,0.06)]">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Generated plan</p>
-                      <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">Nguyen family preview</h3>
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Kế hoạch được tạo</p>
+                      <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">Bản xem trước gia đình Nguyễn</h3>
                     </div>
                     <div className="rounded-full bg-[rgba(108,198,184,0.14)] px-3 py-1 text-xs font-semibold text-[var(--teal-strong)]">
-                      Ready to save
+                      Sẵn sàng lưu
                     </div>
                   </div>
 
@@ -190,9 +176,9 @@ export default function HomePage() {
 
       <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--teal-strong)]">How it works</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--teal-strong)]">Cách hoạt động</p>
           <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)]">
-            A parent-friendly flow with a concrete result at the end.
+            Quy trình thân thiện với phụ huynh và có kết quả rõ ràng ở cuối.
           </h2>
         </div>
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -214,11 +200,11 @@ export default function HomePage() {
       <section id="sample-plan" className="mx-auto max-w-7xl px-6 py-6 lg:py-12">
         <div className="grid gap-8 rounded-[2rem] bg-[var(--panel-dark)] px-6 py-8 text-white shadow-[0_28px_60px_rgba(30,36,48,0.22)] lg:grid-cols-[1fr_1.05fr] lg:px-10 lg:py-10">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--mint-soft)]">What parents receive</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em]">The output is practical, structured, and easy to revisit.</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--mint-soft)]">Phụ huynh sẽ nhận được gì</p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em]">Kết quả đủ thực tế, có cấu trúc và dễ xem lại.</h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/74">
-              Instead of generic advice, the app organizes family inputs into an action plan built around routines,
-              friction points, and realistic next steps.
+              Thay vì lời khuyên chung chung, ứng dụng sắp xếp thông tin của gia đình thành một kế hoạch hành động xoay quanh
+              thói quen, điểm vướng và các bước tiếp theo thực tế.
             </p>
             <div className="mt-7 grid gap-3">
               {outcomes.map((item) => (
@@ -232,35 +218,35 @@ export default function HomePage() {
           <div className="rounded-[1.8rem] bg-white p-6 text-[var(--ink-strong)]">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Sample preview</p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">Family media plan</h3>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Bản xem trước mẫu</p>
+                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">Kế hoạch media gia đình</h3>
               </div>
               <div className="rounded-full bg-[rgba(245,158,66,0.16)] px-3 py-1 text-xs font-semibold text-[var(--orange-strong)]">
-                PDF ready
+                Sẵn sàng xuất PDF
               </div>
             </div>
 
             <div className="mt-6 grid gap-4">
               <div className="rounded-2xl bg-[var(--card-muted)] p-4">
-                <p className="text-sm font-semibold">Priority areas</p>
+                <p className="text-sm font-semibold">Vùng ưu tiên</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">Sleep</span>
-                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">Homework focus</span>
-                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">Digital safety</span>
+                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">Giấc ngủ</span>
+                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">Tập trung khi học</span>
+                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">An toàn số</span>
                 </div>
               </div>
               <div className="rounded-2xl border border-black/6 p-4">
-                <p className="text-sm font-semibold">Daily rhythm</p>
+                <p className="text-sm font-semibold">Nhịp sinh hoạt</p>
                 <p className="mt-2 text-sm leading-6 text-[var(--ink-soft)]">
-                  Weekday routine sets quiet study time before entertainment and removes devices from bedrooms overnight.
+                  Ngày thường ưu tiên thời gian học yên tĩnh trước giải trí và đưa thiết bị ra khỏi phòng ngủ vào buổi tối.
                 </p>
               </div>
               <div className="rounded-2xl border border-black/6 p-4">
-                <p className="text-sm font-semibold">Recommended actions</p>
+                <p className="text-sm font-semibold">Hành động khuyến nghị</p>
                 <ul className="mt-2 space-y-2 text-sm leading-6 text-[var(--ink-soft)]">
-                  <li>Create one family charging zone outside bedrooms.</li>
-                  <li>Turn off autoplay on the child&apos;s main video apps.</li>
-                  <li>Use one shared review point every Sunday evening.</li>
+                  <li>Tạo một khu sạc chung của gia đình bên ngoài phòng ngủ.</li>
+                  <li>Tắt tự động phát trên các ứng dụng video trẻ dùng nhiều nhất.</li>
+                  <li>Dành một thời điểm rà soát chung vào tối Chủ nhật hằng tuần.</li>
                 </ul>
               </div>
             </div>
@@ -271,13 +257,13 @@ export default function HomePage() {
       <section id="benefits" className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Why this helps</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Vì sao hữu ích</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)]">
-              Built around the real points where family routines break down.
+              Được thiết kế từ những điểm đứt gãy thật sự trong sinh hoạt gia đình.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-[var(--ink-soft)]">
-              Parents usually do not need more theory. They need a clearer read on what is happening and a plan they can
-              explain, repeat, and adjust.
+              Phụ huynh thường không cần thêm lý thuyết. Điều cần là một bức tranh rõ hơn về điều đang diễn ra và một kế hoạch
+              có thể giải thích, lặp lại và điều chỉnh được.
             </p>
           </div>
           <div className="grid gap-5">
@@ -303,10 +289,10 @@ export default function HomePage() {
         <div className="rounded-[2rem] bg-[linear-gradient(135deg,_rgba(31,110,106,1),_rgba(50,138,130,1))] px-6 py-10 text-white shadow-[0_28px_60px_rgba(31,110,106,0.28)] lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_auto] lg:items-center">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[rgba(207,245,238,0.92)]">Start here</p>
-              <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em]">Ready to create a family media plan that feels usable?</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[rgba(207,245,238,0.92)]">Bắt đầu từ đây</p>
+              <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em]">Sẵn sàng tạo một kế hoạch media gia đình thật sự dùng được?</h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-white/78">
-                Begin with the questionnaire, generate a tailored plan, and keep refining it as your household routines change.
+                Bắt đầu bằng bảng hỏi, tạo kế hoạch phù hợp với gia đình bạn và tiếp tục tinh chỉnh khi nếp sinh hoạt thay đổi.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
@@ -314,13 +300,13 @@ export default function HomePage() {
                 href="/vi/plan/new"
                 className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-base font-semibold text-[var(--teal-strong)] transition hover:-translate-y-0.5"
               >
-                Start assessment
+                Bắt đầu đánh giá
               </Link>
               <Link
                 href="/vi/auth/login"
                 className="inline-flex items-center justify-center rounded-full border border-white/24 px-7 py-4 text-base font-semibold text-white/92 transition hover:bg-white/6"
               >
-                View saved plans
+                Xem kế hoạch đã lưu
               </Link>
             </div>
           </div>

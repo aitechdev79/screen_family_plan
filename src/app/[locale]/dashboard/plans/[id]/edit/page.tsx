@@ -23,7 +23,7 @@ export default async function EditPlanPage({
       <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)]" />
         <StatePanel
-          eyebrow="Access required"
+          eyebrow="Cần đăng nhập"
           title={text.planPage.editTitle}
           description={text.common.unauthorized}
           actionHref={`/${locale}/auth/login?callbackUrl=/${locale}/dashboard/plans/${id}/edit`}
@@ -39,9 +39,9 @@ export default async function EditPlanPage({
       <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.12),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.8)_100%)]" />
         <StatePanel
-          eyebrow="Missing plan"
+          eyebrow="Không tìm thấy kế hoạch"
           title={text.common.planNotFound}
-          description="The plan you were trying to edit could not be found."
+          description="Không tìm thấy kế hoạch bạn đang muốn chỉnh sửa."
           actionHref={`/${locale}/dashboard/plans`}
           actionLabel={text.dashboard.title}
         />
@@ -54,9 +54,9 @@ export default async function EditPlanPage({
       <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.24),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.14),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.78)_100%)]" />
         <div className="mx-auto max-w-7xl">
-          <AppHeader locale={locale} primaryHref={`/${locale}/dashboard/plans/${id}`} primaryLabel="View current plan" />
+          <AppHeader locale={locale} primaryHref={`/${locale}/dashboard/plans/${id}`} primaryLabel="Xem kế hoạch hiện tại" />
           <div className="max-w-3xl print:hidden">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Updated preview</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Bản xem trước cập nhật</p>
             <h1 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)] sm:text-5xl">
               {text.planPage.previewUpdatedTitle}
             </h1>
@@ -76,9 +76,9 @@ export default async function EditPlanPage({
     <main className="relative overflow-hidden px-6 py-10 lg:px-8 lg:py-14">
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[radial-gradient(circle_at_top_left,_rgba(108,198,184,0.26),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(245,158,66,0.14),_transparent_24%),linear-gradient(180deg,_rgba(255,253,248,1)_0%,_rgba(247,243,234,0.78)_100%)]" />
       <div className="mx-auto max-w-7xl">
-        <AppHeader locale={locale} primaryHref={`/${locale}/dashboard/plans/${id}`} primaryLabel="Back to saved plan" />
+        <AppHeader locale={locale} primaryHref={`/${locale}/dashboard/plans/${id}`} primaryLabel="Về kế hoạch đã lưu" />
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Edit plan</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Chỉnh sửa kế hoạch</p>
           <h1 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)] sm:text-5xl">
             {text.planPage.editTitle}
           </h1>

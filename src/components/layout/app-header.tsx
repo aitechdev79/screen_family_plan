@@ -17,24 +17,24 @@ export function AppHeader({
             FM
           </Link>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Family Media Plan</p>
-            <p className="text-sm text-[var(--ink-soft)]">Guided planning for calmer media routines</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Kế Hoạch Media Gia Đình</p>
+            <p className="text-sm text-[var(--ink-soft)]">Lập kế hoạch rõ ràng cho nhịp dùng màn hình trong gia đình</p>
           </div>
         </div>
 
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <nav className="flex flex-wrap gap-2 text-sm font-medium text-[var(--ink-soft)]">
             <Link href="/" className="rounded-full px-3 py-2 transition hover:bg-[rgba(108,198,184,0.12)] hover:text-[var(--ink-strong)]">
-              Home
+              Trang chủ
             </Link>
             <Link href={`/${locale}/plan/new`} className="rounded-full px-3 py-2 transition hover:bg-[rgba(108,198,184,0.12)] hover:text-[var(--ink-strong)]">
-              New plan
+              Tạo kế hoạch
             </Link>
             <Link href={`/${locale}/dashboard/plans`} className="rounded-full px-3 py-2 transition hover:bg-[rgba(108,198,184,0.12)] hover:text-[var(--ink-strong)]">
-              Saved plans
+              Kế hoạch đã lưu
             </Link>
             <Link href={`/${locale}/auth/login`} className="rounded-full px-3 py-2 transition hover:bg-[rgba(108,198,184,0.12)] hover:text-[var(--ink-strong)]">
-              Sign in
+              Đăng nhập
             </Link>
           </nav>
 

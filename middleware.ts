@@ -3,21 +3,25 @@ import { auth } from "./src/auth";
 
 export default auth((req) => {
   const { nextUrl } = req;
-  const isDashboardRoute = /^\/(vi|en)\/dashboard(\/.*)?$/.test(nextUrl.pathname);
+  if (/^\/en(\/|$)/.test(nextUrl.pathname)) {
+    const redirected = new URL(nextUrl.pathname.replace(/^\/en(?=\/|$)/, "/vi"), nextUrl.origin);
+    redirected.search = nextUrl.search;
+    return NextResponse.redirect(redirected);
+  }
+
+  const isDashboardRoute = /^\/vi\/dashboard(\/.*)?$/.test(nextUrl.pathname);
   const isPlanApiRoute = /^\/api\/plans(\/.*)?$/.test(nextUrl.pathname);
 
   if (req.auth || (!isDashboardRoute && !isPlanApiRoute)) {
     return NextResponse.next();
   }
 
-  const localeMatch = nextUrl.pathname.match(/^\/(vi|en)(\/|$)/);
-  const locale = localeMatch?.[1] ?? "vi";
-  const loginUrl = new URL(`/${locale}/auth/login`, nextUrl.origin);
+  const loginUrl = new URL("/vi/auth/login", nextUrl.origin);
   loginUrl.searchParams.set("callbackUrl", `${nextUrl.pathname}${nextUrl.search}`);
 
   return NextResponse.redirect(loginUrl);
 });
 
 export const config = {
-  matcher: ["/:locale/dashboard/:path*", "/api/plans/:path*"],
+  matcher: ["/((?!_next|.*\\..*|api/auth).*)", "/api/plans/:path*"],
 };

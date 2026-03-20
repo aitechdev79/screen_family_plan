@@ -23,13 +23,13 @@ export function ResultView({ plan, locale }: { plan: GeneratedPlan; locale?: str
           </div>
 
           <div className="grid gap-4">
-            <StatCard label="Children" value={`${plan.children.length}`} />
+            <StatCard label="Số trẻ" value={`${plan.children.length}`} />
             <StatCard
-              label="Priority items"
+              label="Mục ưu tiên"
               value={`${plan.children.reduce((count, child) => count + child.priorityAreas.length, 0)}`}
             />
             <StatCard
-              label="Recommended actions"
+              label="Hành động khuyến nghị"
               value={`${plan.children.reduce((count, child) => count + (child.recommendedActions?.length ?? 0), 0)}`}
             />
           </div>
@@ -50,7 +50,7 @@ export function ResultView({ plan, locale }: { plan: GeneratedPlan; locale?: str
               <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)] print:text-black">
-                    Child profile {index + 1}
+                    Hồ sơ trẻ {index + 1}
                   </p>
                   <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)] print:text-2xl print:text-black">
                     {child.nickname} | {child.ageBand}

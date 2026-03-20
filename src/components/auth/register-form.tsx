@@ -24,7 +24,7 @@ export function RegisterForm({ locale = "vi" }: { locale?: string }) {
         name,
         email,
         password,
-        locale: locale === "en" ? "en" : "vi",
+        locale: "vi",
       });
 
       if (!result.ok) {
@@ -43,7 +43,7 @@ export function RegisterForm({ locale = "vi" }: { locale?: string }) {
         return;
       }
 
-      router.push(`/${locale}/dashboard/plans`);
+      router.push("/vi/dashboard/plans");
       router.refresh();
     });
   }
