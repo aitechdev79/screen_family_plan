@@ -13,7 +13,7 @@ const uiText = {
     },
     auth: {
       loginTitle: "Đăng nhập",
-      loginDescription: "Lưu, chỉnh sửa và in Kế hoạch Media Gia đình của bạn.",
+      loginDescription: "Lưu, chỉnh sửa và in Kế Hoạch Sử dụng Màn hình trong Gia Đình của bạn.",
       loginError: "Đăng nhập không thành công.",
       loginLoading: "Đang đăng nhập...",
       loginButton: "Đăng nhập",
@@ -32,7 +32,7 @@ const uiText = {
       registerLink: "Đăng ký",
     },
     planPage: {
-      newTitle: "Tạo Kế hoạch Media Gia đình",
+      newTitle: "Tạo Kế Hoạch Sử dụng Màn hình trong Gia Đình",
       newDescription: "Trả lời theo từng bước, sau đó xem lại kế hoạch được gợi ý trước khi lưu.",
       resultTitle: "Xem trước kế hoạch",
       resultDescription: "Xem lại kế hoạch được tạo tự động rồi lưu vào tài khoản.",
@@ -137,7 +137,7 @@ const uiText = {
       editQuestionnaire: "Chỉnh lại bảng hỏi",
     },
     resultView: {
-      familyMediaPlan: "Kế hoạch Media Gia đình",
+      familyMediaPlan: "Kế Hoạch Sử dụng Màn hình trong Gia Đình",
       priorityAreas: "Ưu tiên chính",
       crowdingOutAreas: "Màn hình đang lấn chỗ",
       dailyRhythm: "Nhịp sinh hoạt hằng ngày",
@@ -149,7 +149,7 @@ const uiText = {
     },
     dashboard: {
       title: "Kế hoạch đã lưu",
-      description: "Quản lý, chỉnh sửa và in PDF các Kế hoạch Media Gia đình.",
+      description: "Quản lý, chỉnh sửa và in PDF các Kế Hoạch Sử dụng Màn hình trong Gia Đình.",
       loginRequired: "Bạn cần đăng nhập để xem các kế hoạch đã lưu.",
       createNew: "Tạo kế hoạch mới",
       noPlans: "Chưa có kế hoạch nào được lưu.",

@@ -18,7 +18,7 @@ export default async function LoginPage({ params }: { params: Promise<{ locale: 
           <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em]">{text.loginTitle}</h1>
           <p className="mt-4 max-w-md text-sm leading-7 text-white/80">{text.loginDescription}</p>
           <div className="mt-8 grid gap-3">
-            <div className="rounded-2xl bg-white/10 px-4 py-4 text-sm text-white/84">Lưu và xem lại các kế hoạch media gia đình đã tạo.</div>
+            <div className="rounded-2xl bg-white/10 px-4 py-4 text-sm text-white/84">Lưu và xem lại các kế hoạch sử dụng màn hình trong gia đình đã tạo.</div>
             <div className="rounded-2xl bg-white/10 px-4 py-4 text-sm text-white/84">Chỉnh câu trả lời về sau và tạo các phiên bản kế hoạch mới.</div>
             <div className="rounded-2xl bg-white/10 px-4 py-4 text-sm text-white/84">Xuất bản PDF gọn gàng khi bạn sẵn sàng in.</div>
           </div>

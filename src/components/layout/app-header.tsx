@@ -17,7 +17,7 @@ export function AppHeader({
             FM
           </Link>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Kế Hoạch Media Gia Đình</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Kế Hoạch Sử dụng Màn hình trong Gia Đình</p>
             <p className="text-sm text-[var(--ink-soft)]">Lập kế hoạch rõ ràng cho nhịp dùng màn hình trong gia đình</p>
           </div>
         </div>

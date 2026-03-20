@@ -9,7 +9,7 @@ const steps = [
   },
   {
     number: "02",
-    title: "Nhận kế hoạch media gia đình có cấu trúc",
+    title: "Nhận kế hoạch sử dụng màn hình trong gia đình có cấu trúc",
     description:
       "Ứng dụng chuyển câu trả lời thành các ưu tiên thực tế, gợi ý nhịp sinh hoạt, quy tắc gia đình và lưu ý cho cha mẹ.",
   },
@@ -28,28 +28,6 @@ const outcomes = [
   "Gợi ý cho cha mẹ giúp duy trì nhất quán thay vì xung đột",
 ] as const;
 
-const concerns = [
-  {
-    title: "Giấc ngủ và quá tải kích thích",
-    description: "Nhận ra những thói quen khiến màn hình xuất hiện quá sát giờ ngủ và thay bằng giới hạn rõ ràng hơn.",
-  },
-  {
-    title: "Tập trung và xung đột quanh việc học",
-    description: "Xác định lúc giải trí, video ngắn hoặc thông báo đang lấn sang thời gian học và sự tập trung.",
-  },
-  {
-    title: "An toàn và sự tự chủ trên môi trường số",
-    description: "Đánh dấu các mẫu hành vi rủi ro như tự động phát, liên hệ người lạ, thiết bị trong phòng ngủ và lệ thuộc thiết bị cá nhân.",
-  },
-] as const;
-
-const samplePlan = [
-  { label: "Vùng ưu tiên", value: "Giấc ngủ, tập trung, chất lượng nội dung" },
-  { label: "Nhịp sinh hoạt", value: "Không xem video ngắn trước giờ đi học, cùng xem sau khi xong bài" },
-  { label: "Quy tắc gia đình", value: "Thiết bị được sạc bên ngoài phòng ngủ sau 8:30 tối" },
-  { label: "Gợi ý cho cha mẹ", value: "Cùng xem một lần mỗi tuần và trao đổi điều gì hữu ích hoặc gây mệt mỏi" },
-] as const;
-
 export default function HomePage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-[var(--page-bg)] text-[var(--ink-strong)]">
@@ -65,7 +43,7 @@ export default function HomePage() {
                 FM
               </div>
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Kế Hoạch Media Gia Đình</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Kế Hoạch Sử dụng Màn hình trong Gia Đình</p>
                 <p className="text-sm text-[var(--ink-soft)]">Nhịp dùng màn hình rõ ràng hơn cho gia đình hiện đại</p>
               </div>
             </Link>
@@ -102,7 +80,7 @@ export default function HomePage() {
               Sức khỏe số cho gia đình hiện đại
             </div>
             <h1 className="mt-6 max-w-3xl text-5xl font-semibold tracking-[-0.05em] text-[var(--ink-strong)] sm:text-6xl">
-              Tạo kế hoạch media rõ ràng cho gia đình chỉ trong vài phút.
+              Tạo kế hoạch dùng màn hình hiệu quả cho cả nhà chỉ trong vài phút.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--ink-soft)]">
               Dành cho phụ huynh có con từ 5 đến 18 tuổi, ứng dụng này biến những lo lắng thường ngày về màn hình thành
@@ -122,51 +100,31 @@ export default function HomePage() {
                 Xem bản mẫu
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3 text-sm font-medium text-[var(--ink-soft)]">
-              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Không cần cài đặt</span>
-              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Trải nghiệm hoàn toàn bằng tiếng Việt</span>
-              <span className="rounded-full bg-white/75 px-4 py-2 shadow-[0_10px_24px_rgba(17,24,39,0.06)]">Xuất PDF để in</span>
-            </div>
           </div>
 
           <div className="relative">
             <div className="absolute inset-x-10 bottom-3 top-10 rounded-[2rem] bg-[linear-gradient(145deg,_rgba(108,198,184,0.3),_rgba(255,255,255,0.18))] blur-2xl" />
             <div className="relative rounded-[2rem] border border-white/70 bg-[linear-gradient(145deg,_rgba(255,255,255,0.96),_rgba(250,247,239,0.88))] p-5 shadow-[0_30px_80px_rgba(31,110,106,0.15)]">
-              <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-                <div className="rounded-[1.6rem] bg-[var(--teal-strong)] p-5 text-white">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">Tóm tắt đánh giá</p>
-                  <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em]">Hiểu thói quen màn hình theo bối cảnh, không đoán mò</h2>
-                  <div className="mt-6 space-y-3">
-                    <div className="rounded-2xl bg-white/12 p-4">
-                      <p className="text-xs uppercase tracking-[0.2em] text-white/65">Mục tiêu gia đình</p>
-                      <p className="mt-2 text-sm leading-6">Ngủ tốt hơn, tập trung hơn, dùng media an toàn hơn</p>
-                    </div>
-                    <div className="rounded-2xl bg-white/12 p-4">
-                      <p className="text-xs uppercase tracking-[0.2em] text-white/65">Tín hiệu được ghi nhận</p>
-                      <p className="mt-2 text-sm leading-6">Thiết bị trong phòng ngủ, tự động phát, thói quen video ngắn, ảnh hưởng việc học</p>
-                    </div>
+              <div className="rounded-[1.6rem] bg-[var(--teal-strong)] p-6 text-white">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">Tóm tắt đánh giá</p>
+                <h2 className="mt-4 max-w-xl text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">
+                  Hiểu thói quen màn hình theo bối cảnh, không đoán mò
+                </h2>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl bg-white/12 p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/65">Mục tiêu gia đình</p>
+                    <p className="mt-2 text-sm leading-6">Ngủ tốt hơn, tập trung hơn, dùng media an toàn hơn</p>
+                  </div>
+                  <div className="rounded-2xl bg-white/12 p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/65">Tín hiệu được ghi nhận</p>
+                    <p className="mt-2 text-sm leading-6">Thiết bị trong phòng ngủ, tự động phát, thói quen video ngắn, ảnh hưởng việc học</p>
                   </div>
                 </div>
-
-                <div className="rounded-[1.6rem] bg-white p-5 shadow-[inset_0_0_0_1px_rgba(30,36,48,0.06)]">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Kế hoạch được tạo</p>
-                      <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">Bản xem trước gia đình Nguyễn</h3>
-                    </div>
-                    <div className="rounded-full bg-[rgba(108,198,184,0.14)] px-3 py-1 text-xs font-semibold text-[var(--teal-strong)]">
-                      Sẵn sàng lưu
-                    </div>
-                  </div>
-
-                  <div className="mt-5 space-y-3">
-                    {samplePlan.map((item) => (
-                      <div key={item.label} className="rounded-2xl bg-[var(--card-muted)] p-4">
-                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ink-soft)]">{item.label}</p>
-                        <p className="mt-2 text-sm leading-6 text-[var(--ink-strong)]">{item.value}</p>
-                      </div>
-                    ))}
-                  </div>
+                <div className="mt-4 rounded-2xl bg-white/10 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-white/65">Điểm mạnh của kế hoạch</p>
+                  <p className="mt-2 text-sm leading-6 text-white/92">
+                    Chuyển các tín hiệu rời rạc thành ưu tiên rõ ràng, nhịp sinh hoạt thực tế và quy tắc đủ cụ thể để cả nhà làm theo.
+                  </p>
                 </div>
               </div>
             </div>
@@ -177,9 +135,6 @@ export default function HomePage() {
       <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--teal-strong)]">Cách hoạt động</p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)]">
-            Quy trình thân thiện với phụ huynh và có kết quả rõ ràng ở cuối.
-          </h2>
         </div>
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {steps.map((step) => (
@@ -198,8 +153,8 @@ export default function HomePage() {
       </section>
 
       <section id="sample-plan" className="mx-auto max-w-7xl px-6 py-6 lg:py-12">
-        <div className="grid gap-8 rounded-[2rem] bg-[var(--panel-dark)] px-6 py-8 text-white shadow-[0_28px_60px_rgba(30,36,48,0.22)] lg:grid-cols-[1fr_1.05fr] lg:px-10 lg:py-10">
-          <div>
+        <div className="rounded-[2rem] bg-[var(--panel-dark)] px-6 py-8 text-white shadow-[0_28px_60px_rgba(30,36,48,0.22)] lg:px-10 lg:py-10">
+          <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--mint-soft)]">Phụ huynh sẽ nhận được gì</p>
             <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em]">Kết quả đủ thực tế, có cấu trúc và dễ xem lại.</h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/74">
@@ -214,74 +169,6 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-
-          <div className="rounded-[1.8rem] bg-white p-6 text-[var(--ink-strong)]">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Bản xem trước mẫu</p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.03em]">Kế hoạch media gia đình</h3>
-              </div>
-              <div className="rounded-full bg-[rgba(245,158,66,0.16)] px-3 py-1 text-xs font-semibold text-[var(--orange-strong)]">
-                Sẵn sàng xuất PDF
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4">
-              <div className="rounded-2xl bg-[var(--card-muted)] p-4">
-                <p className="text-sm font-semibold">Vùng ưu tiên</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">Giấc ngủ</span>
-                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">Tập trung khi học</span>
-                  <span className="rounded-full bg-white px-3 py-1 text-sm shadow-[0_8px_18px_rgba(17,24,39,0.06)]">An toàn số</span>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-black/6 p-4">
-                <p className="text-sm font-semibold">Nhịp sinh hoạt</p>
-                <p className="mt-2 text-sm leading-6 text-[var(--ink-soft)]">
-                  Ngày thường ưu tiên thời gian học yên tĩnh trước giải trí và đưa thiết bị ra khỏi phòng ngủ vào buổi tối.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-black/6 p-4">
-                <p className="text-sm font-semibold">Hành động khuyến nghị</p>
-                <ul className="mt-2 space-y-2 text-sm leading-6 text-[var(--ink-soft)]">
-                  <li>Tạo một khu sạc chung của gia đình bên ngoài phòng ngủ.</li>
-                  <li>Tắt tự động phát trên các ứng dụng video trẻ dùng nhiều nhất.</li>
-                  <li>Dành một thời điểm rà soát chung vào tối Chủ nhật hằng tuần.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="benefits" className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)]">Vì sao hữu ích</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[var(--ink-strong)]">
-              Được thiết kế từ những điểm đứt gãy thật sự trong sinh hoạt gia đình.
-            </h2>
-            <p className="mt-5 max-w-xl text-base leading-7 text-[var(--ink-soft)]">
-              Phụ huynh thường không cần thêm lý thuyết. Điều cần là một bức tranh rõ hơn về điều đang diễn ra và một kế hoạch
-              có thể giải thích, lặp lại và điều chỉnh được.
-            </p>
-          </div>
-          <div className="grid gap-5">
-            {concerns.map((item) => (
-              <article
-                key={item.title}
-                className="rounded-[1.7rem] border border-black/6 bg-white px-6 py-6 shadow-[0_18px_38px_rgba(17,24,39,0.05)]"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 h-3 w-3 rounded-full bg-[var(--orange-strong)]" />
-                  <div>
-                    <h3 className="text-2xl font-semibold tracking-[-0.03em] text-[var(--ink-strong)]">{item.title}</h3>
-                    <p className="mt-3 text-base leading-7 text-[var(--ink-soft)]">{item.description}</p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -289,8 +176,7 @@ export default function HomePage() {
         <div className="rounded-[2rem] bg-[linear-gradient(135deg,_rgba(31,110,106,1),_rgba(50,138,130,1))] px-6 py-10 text-white shadow-[0_28px_60px_rgba(31,110,106,0.28)] lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_auto] lg:items-center">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[rgba(207,245,238,0.92)]">Bắt đầu từ đây</p>
-              <h2 className="mt-3 text-4xl font-semibold tracking-[-0.04em]">Sẵn sàng tạo một kế hoạch media gia đình thật sự dùng được?</h2>
+              <h2 className="text-4xl font-semibold tracking-[-0.04em]">Sẵn sàng tạo một kế hoạch sử dụng màn hình trong gia đình thật sự dùng được?</h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-white/78">
                 Bắt đầu bằng bảng hỏi, tạo kế hoạch phù hợp với gia đình bạn và tiếp tục tinh chỉnh khi nếp sinh hoạt thay đổi.
               </p>
