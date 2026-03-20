@@ -292,21 +292,15 @@ export function QuestionnaireWizard({ locale = "vi", initialInput, existingPlanI
                 title={text.familyInfo}
                 description="Đặt tên gia đình sẽ được dùng trong bản kế hoạch tạo ra và các phiên bản đã lưu."
               />
-              <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+              <div className="mt-6">
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-[var(--ink-strong)]">{text.familyName}</label>
                   <input
                     className={fieldBaseClass()}
                     value={form.familyName}
-                    placeholder="Gia đình Nguyễn"
+                    placeholder="Tên cha/mẹ/người giám hộ"
                     onChange={(e) => setForm({ ...form, familyName: e.target.value })}
                   />
-                </div>
-                <div className="rounded-[1.5rem] bg-[var(--card-muted)] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">Vì sao phần này quan trọng</p>
-                  <p className="mt-3 text-sm leading-7 text-[var(--ink-soft)]">
-                    Tên gia đình rõ ràng giúp bạn dễ nhận diện các bản đã lưu, nhất là khi kế hoạch được cập nhật theo thời gian.
-                  </p>
                 </div>
               </div>
             </section>

@@ -84,12 +84,6 @@ export default function HomePage() {
               >
                 Bắt đầu đánh giá miễn phí
               </Link>
-              <a
-                href="#sample-plan"
-                className="inline-flex items-center justify-center rounded-full border border-[rgba(30,36,48,0.12)] bg-white/80 px-7 py-4 text-base font-semibold text-[var(--ink-strong)] transition hover:border-[rgba(30,36,48,0.24)]"
-              >
-                Xem bản mẫu
-              </a>
             </div>
           </div>
 
