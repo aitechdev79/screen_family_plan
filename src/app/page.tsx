@@ -4,20 +4,14 @@ const steps = [
   {
     number: "01",
     title: "Trả lời một vài câu hỏi dành cho phụ huynh",
-    description:
-      "Ghi nhận độ tuổi, nhịp sinh hoạt, thói quen thiết bị và những vấn đề gia đình bạn muốn cải thiện trước tiên.",
   },
   {
     number: "02",
     title: "Nhận kế hoạch sử dụng màn hình trong gia đình có cấu trúc",
-    description:
-      "Ứng dụng chuyển câu trả lời thành các ưu tiên thực tế, gợi ý nhịp sinh hoạt, quy tắc gia đình và lưu ý cho cha mẹ.",
   },
   {
     number: "03",
     title: "Lưu, điều chỉnh và in khi cần",
-    description:
-      "Lưu các phiên bản trong tài khoản, cập nhật kế hoạch khi nếp sinh hoạt thay đổi và xuất PDF gọn gàng để dùng tại nhà.",
   },
 ] as const;
 
@@ -54,9 +48,6 @@ export default function HomePage() {
               </a>
               <a href="#sample-plan" className="transition hover:text-[var(--ink-strong)]">
                 Bản mẫu
-              </a>
-              <a href="#benefits" className="transition hover:text-[var(--ink-strong)]">
-                Lợi ích
               </a>
               <Link href="/vi/auth/login" className="transition hover:text-[var(--ink-strong)]">
                 Đăng nhập
@@ -136,18 +127,31 @@ export default function HomePage() {
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--teal-strong)]">Cách hoạt động</p>
         </div>
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {steps.map((step) => (
-            <article
-              key={step.number}
-              className="rounded-[1.75rem] border border-black/6 bg-white/90 p-6 shadow-[0_20px_40px_rgba(17,24,39,0.05)]"
-            >
-              <div className="inline-flex rounded-full bg-[rgba(108,198,184,0.18)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--teal-strong)]">
-                {step.number}
-              </div>
-              <h3 className="mt-5 text-2xl font-semibold tracking-[-0.03em] text-[var(--ink-strong)]">{step.title}</h3>
-              <p className="mt-4 text-base leading-7 text-[var(--ink-soft)]">{step.description}</p>
-            </article>
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-center">
+          {steps.map((step, index) => (
+            <div key={step.number} className="contents">
+              <article
+                className="group relative overflow-hidden rounded-[2rem] border border-white/80 bg-[linear-gradient(160deg,_rgba(255,255,255,0.98),_rgba(248,244,236,0.94))] p-7 shadow-[0_18px_0_rgba(31,110,106,0.08),0_28px_60px_rgba(17,24,39,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_0_rgba(31,110,106,0.12),0_34px_72px_rgba(17,24,39,0.12)] lg:min-h-[220px] lg:[transform:perspective(1200px)_rotateX(3deg)]"
+              >
+                <div className="absolute inset-x-6 top-0 h-16 rounded-b-[1.25rem] bg-[linear-gradient(180deg,_rgba(108,198,184,0.16),_transparent)]" />
+                <div className="relative">
+                  <div className="inline-flex rounded-full bg-[rgba(108,198,184,0.18)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--teal-strong)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+                    {step.number}
+                  </div>
+                  <h3 className="mt-8 max-w-sm text-3xl font-semibold leading-tight tracking-[-0.04em] text-[var(--ink-strong)]">
+                    {step.title}
+                  </h3>
+                </div>
+              </article>
+
+              {index < steps.length - 1 ? (
+                <div className="hidden items-center justify-center lg:flex">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(31,110,106,0.12)] bg-white/90 text-2xl text-[var(--teal-strong)] shadow-[0_14px_30px_rgba(17,24,39,0.08)]">
+                    →
+                  </div>
+                </div>
+              ) : null}
+            </div>
           ))}
         </div>
       </section>
